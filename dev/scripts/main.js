@@ -12,4 +12,4 @@ el.addEventListener('click', function() {
 	else {
 		this.innerHTML = 'changed';
 	}
-})
+});
