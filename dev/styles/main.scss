@@ -1,2 +1,5 @@
-@import "./partials/_homePage";
 @import "./vendor/scss/_vendor_component_like-btn";
+@import "./partials/_homePage";
+
+// Scss styling for recipe card
+@import "./partials/_component_recipeCard.scss";

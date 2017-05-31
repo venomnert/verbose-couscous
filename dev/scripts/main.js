@@ -36,13 +36,17 @@ foodApp.getRecipe = function() {
 	})
 }
 
-// Create a card dynamically
+// Create a recipe card dynamically
 foodApp.generateCard = function() {
+  // See https://stackoverflow.com/questions/22075730/css-background-image-url-path
+  // for web link in background img url
   let $card = $('<div>')
-              .attr('class', 'recipeCard');
-
+              .attr({
+                'class': 'recipeCard'
+                // .attr('src': /image url)
+              });
   let $backSection = $('<div>')
-                    .attr('class', 'recipeCard__backSection');
+                    .attr('class', 'backSection');
   let $backButton = $('<button>')
                     .attr('class', 'backSection__back-btn');
   let $backTitle = $('<p>')
@@ -59,7 +63,25 @@ foodApp.generateCard = function() {
     $(this).toggleClass('liked');
   });
 
-  $card.append($backSection, $likeBtn);
+  let $foodTitle = $('<h2>')
+                  .attr('class', 'recipeCard__like-btn');
+                  // .text() retrieve from api
+
+  let $ingredientSection =  $('<div>')
+                            .attr('class', 'ingredientSection');
+  let $ingredientTitle = $('<h3>')
+                         .attr('class', 'ingredientSection__ingredientTitle')
+                          .text('Ingredients');
+  let $ingredientList = $('<ul>')
+                        .attr('class', 'ingredientList');
+  let $ingredientItem = $('<li>')
+                        .attr('class', 'ingredientList__ingredientItem');
+
+  // Foreach loop over all the ingeridents from the api
+  // Append it to the list
+
+  $ingredientSection.append($ingredientTitle, $ingredientList);
+  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection);
   $('body').append($card);
 }
 foodApp.likeButton = function(text) {
