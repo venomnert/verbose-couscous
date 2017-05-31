@@ -14,7 +14,4 @@ el.addEventListener('click', function() {
 	}
 })
 
-
-foodApp.generateFoodCard = function() {
-  var 
-}
+// b133c8c93e6948804d9c02a215261afa9b1dad5d
