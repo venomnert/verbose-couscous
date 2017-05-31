@@ -1,17 +1,40 @@
-const ohHey = "Hello World";
-let test = 'testing';
-let hello = "hello";
+var foodApp = {}
 
-console.log(ohHey);
+foodApp.init = function () {
+	foodApp.getRecipe()
+}
 
-let el = document.querySelector('h1');
-el.addEventListener('click', function() {
-	if (this.innerHTML === 'changed') {
-		this.innerHTML = 'Hello Neerthigan';
-	}
-	else {
-		this.innerHTML = 'changed';
-	}
-})
+foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
+foodApp.id = '34cb1a7b'
+foodApp.key = 'c6a456b06c87490207e4863b23095a4a'
 
-// b133c8c93e6948804d9c02a215261afa9b1dad5d
+foodApp.foodTypes = {
+	sushiTypes: ["lasagne, spaghetti, macaroni, ravioli, tortellini, fettucine, rigatoni, linguine, penne, rotini, "],
+	pastaTypes: [],
+	stirfryTypes: []
+}
+
+foodApp.getRecipe = function() {
+	var getRecipe = $.ajax({
+		url: `http://api.yummly.com/v1/api/recipes`,
+		method: 'GET',
+		dataType: 'jsonp',
+		data: {
+			'_app_id': foodApp.id,
+			'_app_key': foodApp.key,
+			format: 'jsonp',
+			requirePictures: true,
+			q: "pasta"
+			// maxTotalTimeInSeconds:
+			// allowedAllergy:
+			// allowedDiet:
+		}
+	})
+	.then(function(data){
+		console.log(data)
+	})
+}
+
+$(function(){
+	foodApp.init();
+});
