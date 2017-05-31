@@ -32,10 +32,19 @@ gulp.task('scripts', () => {
   	.pipe(reload({stream: true}));
 });
 
+gulp.task('scripts-vendor', () => {
+  gulp.src('./dev/scripts/vendor/*.js')
+  	.pipe(babel({
+  		presets: ['es2015']
+  	}))
+  	.pipe(gulp.dest('public/scripts/vendor'))
+  	.pipe(reload({stream: true}));
+});
+
 gulp.task('browser-sync', () => {
   browserSync.init({
-    server: '.'  
+    server: '.'
   })
 });
 
-gulp.task('default', ['browser-sync','styles', 'scripts', 'watch']);
+gulp.task('default', ['browser-sync','styles', 'scripts', 'scripts-vendor', 'watch']);
