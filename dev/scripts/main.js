@@ -9,7 +9,7 @@ foodApp.id = '34cb1a7b'
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a'
 
 foodApp.foodTypes = {
-	sushiTypes: ["lasagne, spaghetti, macaroni, ravioli, tortellini, fettucine, rigatoni, linguine, penne, rotini, "],
+	sushiTypes: ["lasagne, spaghetti, macaroni, ravioli, tortellini, fettucine, rigatoni, linguine, penne, rotini"],
 	pastaTypes: [],
 	stirfryTypes: []
 }
