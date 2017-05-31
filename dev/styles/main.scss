@@ -1,10 +1,2 @@
-@import 'setup';
-
-.container {
-	max-width: 900px;
-	margin: 0 auto;
-}
-
-body {
-	background: goldenrod;
-}
+@import "./partials/_homePage";
+@import "./vendor/scss/_vendor_component_like-btn";
