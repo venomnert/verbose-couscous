@@ -13,3 +13,8 @@ el.addEventListener('click', function() {
 		this.innerHTML = 'changed';
 	}
 })
+
+
+foodApp.generateFoodCard = function() {
+  var 
+}
