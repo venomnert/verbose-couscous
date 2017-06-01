@@ -1,5 +1,20 @@
 //homepage styling goes here
 
-body {
-	background: mediumvioletred;
+#main-Page {
+	background: pink;
+}
+
+form { 
+	fieldset {
+		select {
+			background: white;
+			border: none;
+			padding: 1% 10%;
+			font-size: 30px;
+		}
+		h2 {
+			display: inline-block;
+			font-size: 50px;
+		}
+	}
 }

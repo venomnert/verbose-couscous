@@ -2,16 +2,12 @@ var foodApp = {}
 
 foodApp.init = function () {
 	foodApp.getRecipe();
-  	foodApp.generateCard();
+  foodApp.generateCard();
 }
 
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
 foodApp.id = '34cb1a7b'
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a'
-
-// foodApp.foodSequence = function shuffle() {
-
-// }
 
 // foodApp.foodTypes = {
 // 	// pastaTypes: ["lasagne", "spaghetti", "pasta"],
@@ -31,12 +27,8 @@ foodApp.getRecipe = function(foodType, maxTime) {
 			'_app_key': foodApp.key,
 			format: 'jsonp',
 			requirePictures: true,
-			q: 'pasta',
+			q: "pasta",
 			maxResult: 100,
-			// start : randomStart
-			// maxTotalTimeInSeconds: ${maxTime}
-			// allowedAllergy:
-			// allowedDiet:
 		}
 	})
 	.then(function (data){

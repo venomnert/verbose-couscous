@@ -1,3 +1,78 @@
+<!-- <<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Project</title>
+	<link rel="stylesheet" href="public/styles/style.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+	<div id="main-Page">
+		<form action="" class="mainForm">
+			<fieldset>
+				<select name="foodType" id="foodType">
+				    <option value="pasta">Pasta</option>
+				    <option value="sushi">Sushi</option>
+				    <option value="stir-fry">Stir-fry</option>
+				</select>
+				<h2>GENERATOR</h2>
+			</fieldset>
+			<fieldset class="maxTime">
+				<p>How much time do you have?</p>
+				<input type="radio" name="maxTime" value="15">
+				<label> 15 mins </label>
+				
+				<input type="radio" name="maxTime" value="30">
+				<label> 30 mins</label>
+				
+				<input type="radio" name="maxTime" value="45">
+				<label> 45 mins</label>
+
+				<input type="radio" name="maxTime" value="60">
+				<label> 1 hour</label>
+			</fieldset>
+
+			<input type="submit" value="Submit">
+		</form>
+		
+	</div>
+
+	<script src="public/scripts/main.js"></script>
+
+	<script>
+		const foodApp = {};
+
+		foodApp.minutesToSeconds = (num) => {
+			return num * 60;
+		}
+
+		foodApp.events = function (){
+			$('form').on('submit', (e) => {
+				// prevent defaulting from refresh
+				e.preventDefault();
+
+				let foodTypeChoice = $("#foodType").val(); // user food type choice
+				let maxTime = parseInt($("input[name=maxTime]:checked").val()); //int value of minutes
+
+				//convert maxTime into seconds for query search
+				maxTime = foodApp.minutesToSeconds(maxTime); 
+				console.log(foodTypeChoice, maxTime);
+
+				//...passing the variables into AJAX call
+				// foodApp.getRecipe(foodTypeChoice, maxTime);
+			});
+		}
+
+		$(function(){
+			foodApp.events();
+		});
+	</script>
+</body>
+</html>
+======= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
