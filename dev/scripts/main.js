@@ -2,7 +2,6 @@ var foodApp = {}
 
 foodApp.init = function () {
 	foodApp.getRecipe();
-  foodApp.generateCard();
 }
 
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
@@ -33,7 +32,7 @@ foodApp.getRecipe = function(foodType, maxTime) {
 	})
 	.then(function (data){
 		// console.log('data', data.matches)
-		foodApp.shuffle(data);
+		foodApp.generateCard(foodApp.shuffle(data)[0]);
 	});
 }
 
@@ -49,6 +48,7 @@ foodApp.shuffle = function(data) {
 		shuffledRecipes.push(data.matches[indexArray[i]]);
 	}
 	console.log("shuffled", shuffledRecipes);
+	return shuffledRecipes;
 }
 // Includes the min and excludes the max
 foodApp.randomNum = function(min, max) {
@@ -71,14 +71,16 @@ foodApp.shuffleArrayNum = function(array) {
 }
 
 // Create a recipe card dynamically
-foodApp.generateCard = function() {
+foodApp.generateCard = function(data) {
   // See https://stackoverflow.com/questions/22075730/css-background-image-url-path
   // for web link in background img url
+  var fixedImage =  foodApp.imgSizeChange(data.smallImageUrls[0]);
   let $card = $('<div>')
               .attr({
                 'class': 'recipeCard'
-                // .attr('src': /image url)
-              });
+              })
+              .css({'background': `url(${fixedImage})`, 'background-size': 'cover'})
+              console.log(data)
   let $backSection = $('<div>')
                     .attr('class', 'backSection');
   let $backButton = $('<button>')
@@ -108,18 +110,24 @@ foodApp.generateCard = function() {
   });
 
   let $foodTitle = $('<h2>')
-                  .attr('class', 'recipeCard__food-title');
-                  // .text() retrieve from api
+                  .attr('class', 'recipeCard__food-title')
+                  	.text(data.recipeName)
 
-  let $ingredientSection =  $('<div>')
+  let $ingredientSection = $('<div>')
                             .attr('class', 'ingredientSection');
   let $ingredientTitle = $('<h3>')
                          .attr('class', 'ingredientSection__ingredientTitle')
                           .text('Ingredients');
   let $ingredientList = $('<ul>')
                         .attr('class', 'ingredientList');
+
   let $ingredientItem = $('<li>')
                         .attr('class', 'ingredientList__ingredientItem');
+		                    data.ingredients.forEach(function(data) {
+                        	$ingredientItem.append('<li>' + data + '</li>')
+                        	$ingredientList.append($ingredientItem)
+                        	console.log(data)
+                        })
 
   // Foreach loop over all the ingeridents from the api
   // Append it to the list
@@ -127,6 +135,14 @@ foodApp.generateCard = function() {
   $ingredientSection.append($ingredientTitle, $ingredientList);
   $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection);
   $('body').append($card);
+}
+
+ foodApp.imgSizeChange = function(data) {
+ 	console.log(data);
+  console.log('isndie trimmer', data.substr(0, data.length-4));
+  return data.substr(0, data.length-4);
+	// $(generateCard.smallImageUrls[0]).toString('=s90', '')
+	// console.log(generateCard.smallImageUrls[0])
 }
 foodApp.likeButton = function(text) {
   return `<a class='like-button'>
@@ -137,6 +153,8 @@ foodApp.likeButton = function(text) {
       ${text}
     </a>`;
 }
+
+
 
 $(function(){
 	foodApp.init();
