@@ -1,9 +1,10 @@
 const foodApp = {}
 
 foodApp.init = function () {
-  // foodApp.generateCard();
+ // foodApp.generateCard();
   foodApp.generateHomePage();
   foodApp.homePageEvents();
+
 }
 
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
@@ -113,7 +114,6 @@ foodApp.getRecipe = function(foodType, maxTime) {
 		}
 	})
 	.then(function (data){
-		// console.log('data', data.matches)
 		foodApp.generateCard(foodApp.shuffle(data)[0]);
 	});
 }
@@ -151,7 +151,35 @@ foodApp.shuffleArrayNum = function(array) {
   	}
     return a;
 }
+foodApp.generateRecipeList = function() {
+	let $view = $('<div>')
+							.attr('class', 'deck');
+	$view.append(foodApp.generateCard());
+	$view.on('click', '.recipeCard__newRecipe-btn, .recipeCard__like-btn', function(){
+		if ($(this).attr('class') === 'recipeCard__like-btn') {
+	    console.log('like clicked');
+			foodApp.jTinderAdd('swipe-right');
+			$('.recipeCard').on('animationend oAnimationEnd mozAnimationEnd webkitAnimationEnd', function(){
+				console.log('animation done');
+			    $('.deck').empty();
+			});
+		}
+		else {
+			console.log('new recipe clicked');
+			foodApp.jTinderAdd('swipe-left');
+			$('.recipeCard').on('animationend oAnimationEnd mozAnimationEnd webkitAnimationEnd', function(){
+				console.log('animation done');
+					$('.deck').empty();
+			});
+		}
+	});
+	$('.container').empty();
+	$('.container').append($view);
+}
 
+foodApp.jTinderAdd = function add(name){
+		$('.recipeCard').addClass(name);
+}
 // Create a recipe card dynamically
 foodApp.generateCard = function(data) {
   // See https://stackoverflow.com/questions/22075730/css-background-image-url-path
@@ -188,11 +216,6 @@ foodApp.generateCard = function(data) {
                 .attr('class', 'recipeCard__like-btn')
                 .append(foodApp.likeButton('Like'));
 
-  $likeBtn.on('click', 'a.like-button', function() {
-    console.log('clicked');
-    $(this).toggleClass('liked');
-  });
-
   let $foodTitle = $('<h2>')
                   .attr('class', 'recipeCard__food-title')
                   	.text(data.recipeName)
@@ -213,12 +236,13 @@ foodApp.generateCard = function(data) {
                         	console.log(data)
                         })
 
-  // Foreach loop over all the ingeridents from the api
-  // Append it to the list
+	let $newRecipeBtn = $('<button>')
+											.attr('class', 'recipeCard__newRecipe-btn')
+											.text('New Recipe');
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
-  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection);
-  $('body').append($card);
+  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection, $newRecipeBtn);
+  return $card;
 }
 
  foodApp.imgSizeChange = function(data) {
