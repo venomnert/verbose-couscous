@@ -1,14 +1,21 @@
 .recipeCard {
-  position: relative;
+  width: 50%;
+  margin: 0 auto;
 }
 .backSection {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   height: 50px;
 }
 .backSection__back-btn {
-  height: 25px;
-  width: 25px;
+  height: 27px;
+  width: 27px;
+}
+.back-btn__arrow-img {
+  transform: rotate(180deg);
+}
+.recipeCard__food-title {
+
 }

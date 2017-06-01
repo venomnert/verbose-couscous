@@ -33,7 +33,7 @@ foodApp.getRecipe = function(foodType, maxTime) {
 			requirePictures: true,
 			q: 'pasta',
 			maxResult: 100,
-			// start : randomStart 
+			// start : randomStart
 			// maxTotalTimeInSeconds: ${maxTime}
 			// allowedAllergy:
 			// allowedDiet:
