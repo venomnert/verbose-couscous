@@ -1,20 +1,97 @@
 //homepage styling goes here
 
-#main-Page {
-	background: pink;
-}
+#homePage {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.2), 
+      rgba(0, 0, 0, 0.2)),
+	    url('../../assets/homePageBG2.jpg') center/cover no-repeat;
+	height: 100vh;
+	text-align: center;
+	position: relative;
 
-form { 
+	form{
+		width: 80%;
+		margin: 0 auto;
+		position: relative;
+		top: 10%;
+	}
 	fieldset {
+		width: 80%;
+		margin: 0 auto;
+		border: none;
 		select {
-			background: white;
+			background: rgba(0, 0, 0, 0.8);
 			border: none;
 			padding: 1% 10%;
-			font-size: 30px;
+			border-radius: 20px;
+			color: $accent-color;
+			text-align: center;
+			text-transform: capitalize;
+			margin-right: 20px;
+			font: {
+				size: 50px;
+				family: $font-family-text;
+
+			}
+		}
+		label {
+			color: $accent-color;
 		}
 		h2 {
 			display: inline-block;
-			font-size: 50px;
+			color: $text-color;
+			letter-spacing: 5px;
+			text-transform: uppercase;
+			font: {
+				size: 60px;
+				family: $font-family-text;
+			}
 		}
 	}
+	img {
+		width: 50%;
+	}
+	.timeContainer {
+		position: relative;
+		#handle{
+			position: absolute;
+			left: 0px;
+			transform: translateX(50%);
+		}
+	}
+	button {
+	  outline:none;
+	  height: 40px;
+	  text-align: center;
+	  width: 130px;
+	  border-radius:40px;
+	  background: rgba(0, 0, 0, 0.9);
+	  border: 2px solid $text-color;
+	  letter-spacing:1px;
+	  line-height: 1.5;
+	  text-shadow:0;
+
+	  color: $accent-color;
+	  font: {
+	    size:16px;
+	    weight:bold;
+			family: $font-family-text;
+	  }
+
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+
+	  &:hover {
+	    color:white;
+	    // background: $accent-color;
+	    letter-spacing: 2px ;
+	  }
+	  &:active {
+	    
+	  }
+	  &:after {
+	    content:"SUBMIT";
+	  }
+	}
 }
+

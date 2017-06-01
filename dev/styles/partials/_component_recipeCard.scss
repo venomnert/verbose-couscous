@@ -16,6 +16,10 @@
 .back-btn__arrow-img {
   transform: rotate(180deg);
 }
-.recipeCard__food-title {
+.recipeCard__food-title, .ingredientSection__ingredientTitle {
+  font-family: 'Cabin', sans-serif;
+}
 
+.ingredientList__ingredientItem {
+  font-family: 'Old Standard TT', serif;
 }
