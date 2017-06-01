@@ -1,0 +1,14 @@
+.recipeCard {
+  position: relative;
+}
+.backSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+.backSection__back-btn {
+  height: 25px;
+  width: 25px;
+}

@@ -1,10 +1,10 @@
-@import 'setup';
+@import "./partials/setup_colors";
+@import "./partials/setup_typography";
+@import "./partials/setup_normalize";
 
-.container {
-	max-width: 900px;
-	margin: 0 auto;
-}
+@import "./partials/element_img";
 
+<<<<<<< HEAD
 body {
 	background: papayawhip;
 }
@@ -27,3 +27,12 @@ form {
 		}
 	}
 }
+=======
+@import "./vendor/scss/_vendor_component_like-btn";
+
+// scss styling for home page
+@import "./partials/_homePage";
+
+// scss styling for recipe card
+@import "./partials/_component_recipeCard.scss";
+>>>>>>> 1c39154fa1a4e6fee672d9feaefc865c7dc8c35f
