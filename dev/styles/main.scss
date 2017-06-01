@@ -1,5 +1,13 @@
+@import "./partials/setup_colors";
+@import "./partials/setup_typography";
+@import "./partials/setup_normalize";
+
+@import "./partials/element_img";
+
 @import "./vendor/scss/_vendor_component_like-btn";
+
+// scss styling for home page
 @import "./partials/_homePage";
 
-// Scss styling for recipe card
+// scss styling for recipe card
 @import "./partials/_component_recipeCard.scss";

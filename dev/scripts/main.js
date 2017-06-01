@@ -49,8 +49,18 @@ foodApp.generateCard = function() {
                     .attr('class', 'backSection');
   let $backButton = $('<button>')
                     .attr('class', 'backSection__back-btn');
+  let $backButtonImg = $('<img>')
+                      .attr({
+                        'class': 'back-btn__arrow-img',
+                        'src': '../../../img/arrow.svg'
+                      });
+  $backButton.append($backButtonImg);
+  $backButton.on('click', function() {
+    console.log('go back to home page');
+  })
   let $backTitle = $('<p>')
-                    .attr('class', 'backSection__title');
+                    .attr('class', 'backSection__title')
+                    .text('Stir-fry');
                     // .text(); retrieve the value from the select
   $backSection.append($backButton, $backTitle);
 
@@ -64,7 +74,7 @@ foodApp.generateCard = function() {
   });
 
   let $foodTitle = $('<h2>')
-                  .attr('class', 'recipeCard__like-btn');
+                  .attr('class', 'recipeCard__food-title');
                   // .text() retrieve from api
 
   let $ingredientSection =  $('<div>')
