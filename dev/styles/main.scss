@@ -4,35 +4,11 @@
 
 @import "./partials/element_img";
 
-<<<<<<< HEAD
-body {
-	background: papayawhip;
-}
-
-#main-Page {
-	background: pink;
-}
-
-form { 
-	fieldset {
-		select {
-			background: white;
-			border: none;
-			padding: 1% 10%;
-			font-size: 30px;
-		}
-		h2 {
-			display: inline-block;
-			font-size: 50px;
-		}
-	}
-}
-=======
-@import "./vendor/scss/_vendor_component_like-btn";
+@import "./vendor/scss/vendor_component_like-btn";
 
 // scss styling for home page
-@import "./partials/_homePage";
+@import "./partials/homePage";
 
 // scss styling for recipe card
-@import "./partials/_component_recipeCard.scss";
->>>>>>> 1c39154fa1a4e6fee672d9feaefc865c7dc8c35f
+@import "./partials/component_recipeCard";
+@import "./partials/component_like-btn";
