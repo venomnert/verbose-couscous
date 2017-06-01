@@ -93,7 +93,19 @@ foodApp.generateRecipeList = function() {
 	$('.container').empty();
 	$('.container').append($view);
 }
+foodApp.recipeCardPopulator = function(data) {
+	let index = -1;
 
+	return function() {
+		index++;
+		if (index < data.length) {
+			return data[index];
+		}
+		else {
+
+		}
+	}
+}
 foodApp.jTinderAdd = function add(name){
 		$('.recipeCard').addClass(name);
 }
