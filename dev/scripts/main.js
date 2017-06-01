@@ -2,7 +2,7 @@ var foodApp = {}
 
 foodApp.init = function () {
 	foodApp.getRecipe();
-  foodApp.generateCard();
+	foodApp.generateRecipeList();
 }
 
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
@@ -14,8 +14,6 @@ foodApp.key = 'c6a456b06c87490207e4863b23095a4a'
 // 	// // , "macaroni", "ravioli", "tortellini", "fettucine", "rigatoni", "linguine", "penne", "rotini"],
 // 	// sushiTypes: ["nigiri, sashimi, maki, uramaki, temak, sushi"]
 // }
-
-
 
 foodApp.getRecipe = function(foodType, maxTime) {
 	var getRecipe = $.ajax({
@@ -33,7 +31,8 @@ foodApp.getRecipe = function(foodType, maxTime) {
 	})
 	.then(function (data){
 		// console.log('data', data.matches)
-		foodApp.shuffle(data);
+		// foodApp.shuffle(data);
+
 	});
 }
 
@@ -69,7 +68,35 @@ foodApp.shuffleArrayNum = function(array) {
   	}
     return a;
 }
+foodApp.generateRecipeList = function() {
+	let $view = $('<div>')
+							.attr('class', 'deck');
+	$view.append(foodApp.generateCard());
+	$view.on('click', '.recipeCard__newRecipe-btn, .recipeCard__like-btn', function(){
+		if ($(this).attr('class') === 'recipeCard__like-btn') {
+	    console.log('like clicked');
+			foodApp.jTinderAdd('swipe-right');
+			$('.recipeCard').on('animationend oAnimationEnd mozAnimationEnd webkitAnimationEnd', function(){
+				console.log('animation done');
+			    $('.deck').empty();
+			});
+		}
+		else {
+			console.log('new recipe clicked');
+			foodApp.jTinderAdd('swipe-left');
+			$('.recipeCard').on('animationend oAnimationEnd mozAnimationEnd webkitAnimationEnd', function(){
+				console.log('animation done');
+					$('.deck').empty();
+			});
+		}
+	});
+	$('.container').empty();
+	$('.container').append($view);
+}
 
+foodApp.jTinderAdd = function add(name){
+		$('.recipeCard').addClass(name);
+}
 // Create a recipe card dynamically
 foodApp.generateCard = function() {
   // See https://stackoverflow.com/questions/22075730/css-background-image-url-path
@@ -102,11 +129,6 @@ foodApp.generateCard = function() {
                 .attr('class', 'recipeCard__like-btn')
                 .append(foodApp.likeButton('Like'));
 
-  $likeBtn.on('click', 'a.like-button', function() {
-    console.log('clicked');
-    $(this).toggleClass('liked');
-  });
-
   let $foodTitle = $('<h2>')
                   .attr('class', 'recipeCard__food-title');
                   // .text() retrieve from api
@@ -121,12 +143,13 @@ foodApp.generateCard = function() {
   let $ingredientItem = $('<li>')
                         .attr('class', 'ingredientList__ingredientItem');
 
-  // Foreach loop over all the ingeridents from the api
-  // Append it to the list
+	let $newRecipeBtn = $('<button>')
+											.attr('class', 'recipeCard__newRecipe-btn')
+											.text('New Recipe');
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
-  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection);
-  $('body').append($card);
+  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection, $newRecipeBtn);
+  return $card;
 }
 foodApp.likeButton = function(text) {
   return `<a class='like-button'>
@@ -137,6 +160,8 @@ foodApp.likeButton = function(text) {
       ${text}
     </a>`;
 }
+
+
 
 $(function(){
 	foodApp.init();
