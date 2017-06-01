@@ -74,8 +74,8 @@ foodApp.generateCard = function() {
   });
 
   let $foodTitle = $('<h2>')
-                  .attr('class', 'recipeCard__food-title');
-                  // .text() retrieve from api
+                  .attr('class', 'recipeCard__food-title')
+                  .text('Food Title');
 
   let $ingredientSection =  $('<div>')
                             .attr('class', 'ingredientSection');
