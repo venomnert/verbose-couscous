@@ -11,9 +11,12 @@ foodApp.likedRecipes = [];
 foodApp.timerValue = 0;
 foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
- // foodApp.generateCard();
   foodApp.generateHomePage();
+}
 
+// converting minutes to seconds
+foodApp.minutesToSeconds = (num) => {
+  return num * 60;
 }
 
 foodApp.generateHomePage = function() {
@@ -27,11 +30,10 @@ foodApp.generateHomePage = function() {
   let $homePage = $('<div>').attr('id','homePage');
   let $homePageForm = $('<form>');
 
-
-  //FOOD TYPE FIELDSET
   let $foodTypeFieldset = $('<fieldset>')
                           .attr('class','foodType');
 
+  // setting the parameters for the food choice
   let $foodTypeSelect =$('<select>')
                         .attr({
                           'name': 'foodType',
@@ -136,7 +138,7 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 			format: 'jsonp',
 			requirePictures: true,
 			q: foodType,
-      maxTotalTimeInSeconds: maxTime,
+     	 	maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
 			start: startFrom,
 		}
@@ -147,6 +149,7 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 	});
 }
 
+// shuffle the array of results we get so the first recipe retrieved isn't always the same
 foodApp.shuffle = function(data) {
 	var indexArray = [];
 	var shuffledRecipes = [];
@@ -266,7 +269,7 @@ foodApp.generateCard = function(data) {
   let $backButtonImg = $('<img>')
                       .attr({
                         'class': 'back-btn__arrow-img',
-                        'src': '../../../img/arrow.svg'
+                        'src': 'assets/arrow.svg'
                       });
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
@@ -295,7 +298,7 @@ foodApp.generateCard = function(data) {
   let $ingredientList = $('<ul>')
                         .attr('class', 'ingredientList');
 
-  let $ingredientItem = $('<li>')
+  let $ingredientItem = $('<div>')
                         .attr('class', 'ingredientList__ingredientItem');
 		                    data.ingredients.forEach(function(data) {
                         	$ingredientItem.append('<li>' + data + '</li>')
@@ -336,8 +339,8 @@ foodApp.imgSizeChange = function(data) {
  // 	console.log(data);
   // console.log('isndie trimmer', data.substr(0, data.length-4));
   return data.substr(0, data.length-4);
-	// $(generateCard.smallImageUrls[0]).toString('=s90', '')
-	// console.log(generateCard.smallImageUrls[0])
+	$(generateCard.smallImageUrls[0]).toString('=s90', '')
+	console.log(generateCard.smallImageUrls[0])
 }
 foodApp.likeButton = function(text) {
   return `<a class='like-button'>
