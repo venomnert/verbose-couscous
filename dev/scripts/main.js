@@ -11,12 +11,8 @@ foodApp.likedRecipes = [];
 foodApp.timerValue = 0;
 foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
+ // foodApp.generateCard();
   foodApp.generateHomePage();
-}
-
-// converting minutes to seconds
-foodApp.minutesToSeconds = (num) => {
-  return num * 60;
 }
 
 foodApp.generateHomePage = function() {
@@ -30,10 +26,11 @@ foodApp.generateHomePage = function() {
   let $homePage = $('<div>').attr('id','homePage');
   let $homePageForm = $('<form>');
 
+
+  //FOOD TYPE FIELDSET
   let $foodTypeFieldset = $('<fieldset>')
                           .attr('class','foodType');
 
-  // setting the parameters for the food choice
   let $foodTypeSelect =$('<select>')
                         .attr({
                           'name': 'foodType',
@@ -67,16 +64,6 @@ foodApp.generateHomePage = function() {
                     'id': 'handle'});
 
   $timeContainer.append($timePic, $timeHandle);
-/*  for (let i = 1; i <=4; i++) {
-      let $timeOption = $('<input>')
-                        .attr({
-                          'type': 'radio',
-                          'name': 'maxTime',
-                          'value': `${i*15}`
-                        });
-      let $timeLabel =$(`<label>${i*15} Mins</label>`);
-      $maxTimeFieldset.append($timeOption, $timeLabel);
-  }*/
   $maxTimeFieldset.append($timeContainer);
   // let $submitButton = $('<input type="submit" value="Submit" class="btn btn-2">');
 
@@ -89,7 +76,6 @@ foodApp.generateHomePage = function() {
   $('.container').append($homePage);
   foodApp.homePageEvents();
 }
-
 
 //ANIMATION FOR TIMER VALUE ON HOMEPAGE
 foodApp.timerEvents = function() {
@@ -107,7 +93,7 @@ foodApp.homePageEvents = function (){
 
   $('#submit').on('click', (e) => {
     // prevent defaulting from refresh
-    e.preventDefault();
+    e.preventDefault()
 
 		// Store the users food type choice, since its need for other parts of the code
 		// Same applies for the time choice as well
@@ -138,7 +124,7 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 			format: 'jsonp',
 			requirePictures: true,
 			q: foodType,
-     	 	maxTotalTimeInSeconds: maxTime,
+      maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
 			start: startFrom,
 		}
@@ -149,7 +135,6 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 	});
 }
 
-// shuffle the array of results we get so the first recipe retrieved isn't always the same
 foodApp.shuffle = function(data) {
 	var indexArray = [];
 	var shuffledRecipes = [];
@@ -271,10 +256,12 @@ foodApp.generateCard = function(data) {
                         'class': 'back-btn__arrow-img'
                       })
                       .append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
+
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
     // console.log('go back to home page');
-		foodApp.generateHomePage();
+		// foodApp.generateHomePage();
+    foodApp.generateGrid();
   })
   
   $backSection.append($backButton);
@@ -295,7 +282,7 @@ foodApp.generateCard = function(data) {
   let $ingredientList = $('<ul>')
                         .attr('class', 'ingredientList');
 
-  let $ingredientItem = $('<div>')
+  let $ingredientItem = $('<li>')
                         .attr('class', 'ingredientList__ingredientItem');
 		                    data.ingredients.forEach(function(data) {
                         	$ingredientItem.append('<li>' + data + '</li>')
@@ -337,8 +324,8 @@ foodApp.imgSizeChange = function(data) {
  // 	console.log(data);
   // console.log('isndie trimmer', data.substr(0, data.length-4));
   return data.substr(0, data.length-4);
-	$(generateCard.smallImageUrls[0]).toString('=s90', '')
-	console.log(generateCard.smallImageUrls[0])
+	// $(generateCard.smallImageUrls[0]).toString('=s90', '')
+	// console.log(generateCard.smallImageUrls[0])
 }
 foodApp.likeButton = function(text) {
   return `<a class='like-button'>
@@ -359,7 +346,47 @@ foodApp.newRecipeButton = function(text) {
 }
 
 foodApp.generateGrid = function() {
+  // Remove any previous generated content
+  $('.container').empty();
 
+  // Create a grid container and append it to the dom
+  let $gridContainer = $('<div>')
+                    .attr('class', 'grid');
+
+  foodApp.likedRecipes.forEach((recipe) => {
+    $gridContainer.append(foodApp.generateGridItem(recipe));
+  });
+  $('.container').append($gridContainer);
+}
+
+foodApp.generateGridItem = function(recipeObj) {
+  let $savedCardSml = $('<div>')
+                      .attr('class', 'savedCardSml grid-item');
+
+  let $name = $('<h3>')
+              .attr('class','savedCardSml__name')
+              .text(recipeObj.recipeName);
+
+  let $authorsName = $('<h4>')
+                    .attr('class','savedCardSml__author')
+                    .text(recipeObj.sourceDisplayName);
+  let $time = $('<p>')
+              .attr('class', 'savedCardSml__time')
+              .text(recipeObj.totalTimeInSeconds);
+
+  // Add stars based on the rating returned
+  let $rating = $('<div>')
+                .attr('class', 'savedCardSml__rating');
+  for (let i = 0; i < recipeObj.rating; i++) {
+    $rating.append('<span>*</span>');
+  }
+
+  let $linkBtn = $('<a>')
+                  .attr('class', 'savedCardSml__linkBtn');
+
+
+  $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn);
+  return $savedCardSml;
 }
 
 $(function(){

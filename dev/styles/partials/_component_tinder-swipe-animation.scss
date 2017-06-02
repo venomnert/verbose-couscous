@@ -1,11 +1,11 @@
 .swipe-left {
-    -webkit-animation: swipe-left 1s forwards;
-            animation: swipe-left 1s forwards;
+    -webkit-animation: swipe-left 0.5s forwards;
+            animation: swipe-left 0.5s forwards;
 }
 
 .swipe-right {
-    -webkit-animation: swipe-right 1s forwards;
-            animation: swipe-right 1s forwards;
+    -webkit-animation: swipe-right 0.5s forwards;
+            animation: swipe-right 0.5s forwards;
 }
 
 @-webkit-keyframes swipe-left {
