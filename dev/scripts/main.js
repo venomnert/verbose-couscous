@@ -60,9 +60,9 @@ foodApp.generateHomePage = function() {
 
   // radio buttons for maxTime
   let $timeContainer = $('<div>').attr('class', 'timeContainer')
-  let $timePic = $('<img>').attr('src', 'assets/timerBG.png');
+  let $timePic = $('<img>').attr('src', 'assets/timerLayer1.png');
   let $timeHandle = $('<img>').attr({
-                    'src': 'assets/timerHandle.png',
+                    'src': 'assets/timerLayer2.png',
                     'id': 'handle'});
 
   $timeContainer.append($timePic, $timeHandle);
@@ -88,11 +88,23 @@ foodApp.generateHomePage = function() {
   $('.container').append($homePage);
 }
 
+foodApp.timerValue = 0;
+//ANIMATION FOR TIMER VALUE ON HOMEPAGE
+foodApp.timerEvents = function() {
+  let rotate = 0;
+  $("#handle").on('click', function (){
+    rotate++;
+    foodApp.timerValue = rotate % 4;
+    $("#handle").css('transform', `rotate(${rotate * 90}deg)`);
+  });
+}
 // EVENTS ON HOMEPAGE EVENTS
 foodApp.homePageEvents = function (){
   $('#submit').on('click', (e) => {
     // prevent defaulting from refresh
     e.preventDefault();
+		// Store the users food type choice, since its need for other parts of the code
+		// Same applies for the time choice as well
     this.userFoodType = $("#foodType").val(); // user food type choice
     let maxTime = parseInt($("input[name=maxTime]:checked").val()); //int value of minutes
 
@@ -315,7 +327,7 @@ foodApp.likeButton = function(text) {
 }
 
 foodApp.generateGrid = function() {
-	
+
 }
 
 $(function(){
