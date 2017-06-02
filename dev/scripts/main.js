@@ -2,10 +2,8 @@ const foodApp = {}
 
 // initialize the functions we want to run right away
 foodApp.init = function () {
-  // foodApp.generateCard();
-  // foodApp.generateHomePage();
-  // foodApp.homePageEvents();
-  foodApp.getRecipe();
+  foodApp.generateHomePage();
+  foodApp.homePageEvents();
 }
 
 // storing the API url, id and key
@@ -235,7 +233,7 @@ foodApp.generateCard = function(data) {
   let $ingredientList = $('<ul>')
                         .attr('class', 'ingredientList');
 
-  let $ingredientItem = $('<li>')
+  let $ingredientItem = $('<div>')
                         .attr('class', 'ingredientList__ingredientItem');
 		                    data.ingredients.forEach(function(data) {
                         	$ingredientItem.append('<li>' + data + '</li>')

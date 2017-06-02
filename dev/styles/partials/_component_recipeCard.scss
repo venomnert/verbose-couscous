@@ -20,7 +20,7 @@
   font-family: 'Cabin', sans-serif;
   margin: 0;
   padding: 20px 20px;
-  color: #FA6900;
+  color: #000000;
 }
 
 .recipeCard__food-title {
@@ -34,20 +34,24 @@
 
 .recipeCard {
   width: 400px;
-
 }
 
 .recipeCard__food-title {
-  background-color: rgba(0,0,0,0.5);
+  background-color: $secondary-color;
+  opacity: 0.85;
 }
 
 .ingredientList__ingredientItem {
   font-family: 'Old Standard TT', serif;
   padding: 10px 20px;
-  color: #FA6900;
+  color: $text-color;
 }
 
 .ingredientSection {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(255,255,255,1);
   margin: 0 30px;
+}
+
+.ingredientList {
+  margin-top: 0;
 }
