@@ -4,6 +4,7 @@ foodApp.init = function () {
   // foodApp.generateCard();
   foodApp.generateHomePage();
   foodApp.homePageEvents();
+  
 }
 
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
@@ -80,20 +81,30 @@ foodApp.generateHomePage = function() {
   $('body').append($homePage);
 }
 
+foodApp.timerValue = 0;
+//ANIMATION FOR TIMER VALUE ON HOMEPAGE
+foodApp.timerEvents = function() {
+  let rotate = 0;
+  $("#handle").on('click', function (){
+    rotate++;
+    foodApp.timerValue = rotate % 4;
+    $("#handle").css('transform', `rotate(${rotate * 90}deg)`);
+  });
+}
 // EVENTS ON HOMEPAGE EVENTS
 foodApp.homePageEvents = function (){
+  foodApp.timerEvents();
+
   $('#submit').on('click', (e) => {
-    // prevent defaulting from refresh
-    e.preventDefault();
+    e.preventDefault(); // prevent defaulting from refresh
 
-    let foodTypeChoice = $("#foodType").val(); // user food type choice
-    let maxTime = parseInt($("input[name=maxTime]:checked").val()); //int value of minutes
-
-    //convert maxTime into seconds for query search
-    maxTime = foodApp.minutesToSeconds(maxTime); 
-    console.log(foodTypeChoice, maxTime);
-
-    foodApp.getRecipe(foodTypeChoice, maxTime);
+    let foodTypeChoice = $("#foodType").val(); // get user food type choice
+    if (foodApp.timerValue === 0) {
+      foodApp.timerValue = 4;
+    }
+    let foodTime = foodApp.timerValue * 15 * 60; // food timer in seconds
+    console.log(foodTypeChoice, foodTime);
+    foodApp.getRecipe(foodTypeChoice, foodTime);
   });
 }
 

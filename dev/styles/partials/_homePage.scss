@@ -55,8 +55,9 @@
 		position: relative;
 		#handle{
 			position: absolute;
-			left: 0px;
-			transform: translateX(50%);
+			left: 25%;
+			transition: all 0.8s;
+			
 		}
 	}
 	button {
