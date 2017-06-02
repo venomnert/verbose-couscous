@@ -26,17 +26,18 @@ a {
 }
 
 .like-button {
-  border: 2px solid $gray;
+  background-color: rgba(0,0,0,0.4);
+  border: 2px solid $secondary-color;
   border-radius: 40px;
   padding: .45rem .75rem;
-  color: darken($gray, 25%);
+  color: #ffffff;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
   transition: all .25s $bezier;
-  filter: grayscale(100%);
+  // filter: grayscale(100%);
   user-select: none;
   
   &.liked {

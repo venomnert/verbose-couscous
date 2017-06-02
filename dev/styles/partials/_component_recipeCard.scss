@@ -1,6 +1,7 @@
 .recipeCard {
   width: 50%;
   margin: 0 auto;
+  margin-top: 75px;
 }
 .backSection {
   position: relative;
@@ -25,7 +26,7 @@
 
 .recipeCard__food-title {
     padding: 20px 20px;
-    margin: 150px 30px 0px 30px;
+    margin: 125px 40px 0px 40px;
 }
 
 .ingredientSection__ingredientTitle {
@@ -33,7 +34,8 @@
 }
 
 .recipeCard {
-  width: 400px;
+  width: 500px;
+  // height: 700px;
 }
 
 .recipeCard__food-title {
@@ -49,7 +51,7 @@
 
 .ingredientSection {
   background-color: rgba(255,255,255,1);
-  margin: 0 30px;
+  margin: 0 40px;
 }
 
 .ingredientList {

@@ -260,27 +260,24 @@ foodApp.generateCard = function(data) {
 								'class':'recipeCard',
 								'data-id': data.id
 							})
-              .css({'background': `url(${fixedImage})`, 'background-size': 'cover'});
+              .css({'background': `url(${fixedImage})`, 'background-size': 'cover', 'background-position': 'center center'});
               console.log(data)
   let $backSection = $('<div>')
                     .attr('class', 'backSection');
   let $backButton = $('<button>')
-                    .attr('class', 'backSection__back-btn');
-  let $backButtonImg = $('<img>')
+                    .attr('class', 'backSection__back-btn like-button');
+  let $backButtonImg = $('<div>')
                       .attr({
-                        'class': 'back-btn__arrow-img',
-                        'src': 'assets/arrow.svg'
-                      });
+                        'class': 'back-btn__arrow-img'
+                      })
+                      .append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
     // console.log('go back to home page');
 		foodApp.generateHomePage();
   })
-  let $backTitle = $('<p>')
-                    .attr('class', 'backSection__title')
-                    .text(foodApp.userFoodType);
-                    // .text(); retrieve the value from the select
-  $backSection.append($backButton, $backTitle);
+  
+  $backSection.append($backButton);
 
   let $likeBtn = $('<div>')
                 .attr('class', 'recipeCard__like-btn')
@@ -306,12 +303,13 @@ foodApp.generateCard = function(data) {
                         	// console.log(data)
                         })
 
-	let $newRecipeBtn = $('<button>')
+	let $newRecipeBtn = $('<div>')
 											.attr('class', 'recipeCard__newRecipe-btn')
-											.text('New Recipe');
+											.append(foodApp.newRecipeButton('Not feeling it!'));
+											// .text('New Recipe');
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
-  $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection, $newRecipeBtn);
+  $card.append($backSection, $foodTitle, $ingredientSection, $newRecipeBtn, $likeBtn);
 
 	// This section is for dealing with swipe event
 	var mc = new Hammer($card[0]);
@@ -348,6 +346,14 @@ foodApp.likeButton = function(text) {
         <div class='heart-animation-1'></div>
         <div class='heart-animation-2'></div>
       </span>
+      ${text}
+    </a>`;
+}
+
+foodApp.newRecipeButton = function(text) {
+  return `<a class='like-button'>
+        <div class='heart-animation-1'></div>
+        <div class='heart-animation-2'></div>
       ${text}
     </a>`;
 }
