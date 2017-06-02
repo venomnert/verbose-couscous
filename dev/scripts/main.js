@@ -132,7 +132,7 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 			requirePictures: true,
 			q: foodType,
       maxTotalTimeInSeconds: maxTime,
-			maxResult: 3,
+			maxResult: 100,
 			start: startFrom,
 		}
 	})
@@ -228,7 +228,7 @@ foodApp.recipeCardPopulator = function(data) {
 		}
 		else {
 			// Make ajax request
-			console.log('make ajax request');
+			// console.log('make ajax request');
 			// Increment globalRequestCount by index
 			foodApp.globalRequestCount += index;
 
@@ -245,9 +245,6 @@ foodApp.jTinderAdd = function add(name){
 
 // Create a recipe card dynamically
 foodApp.generateCard = function(data) {
-  // See https://stackoverflow.com/questions/22075730/css-background-image-url-path
-  // for web link in background img url
-
   var fixedImage =  foodApp.imgSizeChange(data.smallImageUrls[0]);
 
   let $card = $('<div>')
@@ -268,7 +265,7 @@ foodApp.generateCard = function(data) {
                       });
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
-    console.log('go back to home page');
+    // console.log('go back to home page');
 		foodApp.generateHomePage();
   })
   let $backTitle = $('<p>')
@@ -307,7 +304,28 @@ foodApp.generateCard = function(data) {
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
   $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection, $newRecipeBtn);
-  return $card;
+
+	// This section is for dealing with swipe event
+	var mc = new Hammer($card[0]);
+	mc.on("panleft", function(ev) {
+		// console.log('left swipe');
+		
+		// The code below debounces the swipe event.
+		// The swipe event gets called multiple times but we only want it to be called once
+		clearInterval(window.leftThrottle);
+		window.leftThrottle = setTimeout(function() {
+			$('.recipeCard__newRecipe-btn').trigger('click');
+		}, 200);
+	});
+	mc.on("panright", function(ev) {
+		// console.log('right swipe');
+		clearInterval(window.rightThrottle);
+		window.rightThrottle = setTimeout(function() {
+			$('.recipeCard__like-btn').trigger('click');
+		}, 200);
+	});
+
+	return $card;
 }
 foodApp.imgSizeChange = function(data) {
  // 	console.log(data);
