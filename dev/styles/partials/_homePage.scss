@@ -55,8 +55,11 @@
 		position: relative;
 		#handle{
 			position: absolute;
-			left: 25%;
+			left: 24%;
+			top: -2%;
 			transition: all 0.8s;
+			width: 52%;
+			height: 103%;
 			
 		}
 	}

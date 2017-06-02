@@ -54,9 +54,9 @@ foodApp.generateHomePage = function() {
 
   // radio buttons for maxTime
   let $timeContainer = $('<div>').attr('class', 'timeContainer')
-  let $timePic = $('<img>').attr('src', 'assets/timerBG.png');
+  let $timePic = $('<img>').attr('src', 'assets/timerLayer1.png');
   let $timeHandle = $('<img>').attr({
-                    'src': 'assets/timerHandle.png',
+                    'src': 'assets/timerLayer2.png',
                     'id': 'handle'}); 
 
   $timeContainer.append($timePic, $timeHandle);
