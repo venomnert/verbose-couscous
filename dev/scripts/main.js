@@ -93,6 +93,7 @@ foodApp.timerValue = 0;
 foodApp.timerEvents = function() {
   let rotate = 0;
   $("#handle").on('click', function (){
+    console.log('clicke');
     rotate++;
     foodApp.timerValue = rotate % 4;
     $("#handle").css('transform', `rotate(${rotate * 90}deg)`);
@@ -100,6 +101,7 @@ foodApp.timerEvents = function() {
 }
 // EVENTS ON HOMEPAGE EVENTS
 foodApp.homePageEvents = function (){
+  foodApp.timerEvents();
   $('#submit').on('click', (e) => {
     // prevent defaulting from refresh
     e.preventDefault();
@@ -309,7 +311,7 @@ foodApp.generateCard = function(data) {
 	var mc = new Hammer($card[0]);
 	mc.on("panleft", function(ev) {
 		// console.log('left swipe');
-		
+
 		// The code below debounces the swipe event.
 		// The swipe event gets called multiple times but we only want it to be called once
 		clearInterval(window.leftThrottle);
