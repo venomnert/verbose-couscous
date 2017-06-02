@@ -13,7 +13,7 @@ foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
  // foodApp.generateCard();
   foodApp.generateHomePage();
-  
+
 }
 
 foodApp.generateHomePage = function() {
@@ -93,6 +93,7 @@ foodApp.generateHomePage = function() {
 foodApp.timerEvents = function() {
   let rotate = 0;
   $("#handle").on('click', function (){
+    console.log('clicke');
     rotate++;
     foodApp.timerValue = rotate % 4;
     $("#handle").css('transform', `rotate(${rotate * 90}deg)`);
@@ -110,10 +111,10 @@ foodApp.homePageEvents = function (){
 		// Same applies for the time choice as well
     this.userFoodType = $("#foodType").val(); // user food type choice
     if (foodApp.timerValue === 0) {
-      this.timerValue = 4;  
+      this.timerValue = 4;
     }
 
-    this.userTimeChoiceInSeconds = this.timerValue * 15 * 60 ; 
+    this.userTimeChoiceInSeconds = this.timerValue * 15 * 60 ;
     console.log(this.userFoodType, this.userTimeChoiceInSeconds);
 
 		// Remove home page and make room for overlay
@@ -313,7 +314,7 @@ foodApp.generateCard = function(data) {
 	var mc = new Hammer($card[0]);
 	mc.on("panleft", function(ev) {
 		// console.log('left swipe');
-		
+
 		// The code below debounces the swipe event.
 		// The swipe event gets called multiple times but we only want it to be called once
 		clearInterval(window.leftThrottle);
