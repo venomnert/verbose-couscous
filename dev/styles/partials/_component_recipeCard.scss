@@ -18,8 +18,36 @@
 }
 .recipeCard__food-title, .ingredientSection__ingredientTitle {
   font-family: 'Cabin', sans-serif;
+  margin: 0;
+  padding: 20px 20px;
+  color: #FA6900;
+}
+
+.recipeCard__food-title {
+    padding: 20px 20px;
+    margin: 150px 30px 0px 30px;
+}
+
+.ingredientSection__ingredientTitle {
+  padding: 10px 20px;
+}
+
+.recipeCard {
+  width: 400px;
+
+}
+
+.recipeCard__food-title {
+  background-color: rgba(0,0,0,0.5);
 }
 
 .ingredientList__ingredientItem {
   font-family: 'Old Standard TT', serif;
+  padding: 10px 20px;
+  color: #FA6900;
+}
+
+.ingredientSection {
+  background-color: rgba(0,0,0,0.5);
+  margin: 0 30px;
 }

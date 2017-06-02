@@ -1,33 +1,38 @@
 const foodApp = {}
 
+// initialize the functions we want to run right away
 foodApp.init = function () {
- // foodApp.generateCard();
-  foodApp.generateHomePage();
-  foodApp.homePageEvents();
-
+  // foodApp.generateCard();
+  // foodApp.generateHomePage();
+  // foodApp.homePageEvents();
+  foodApp.getRecipe();
 }
 
+// storing the API url, id and key
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes"
 foodApp.id = '34cb1a7b'
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a'
 
-
+// storing our 3 main food types in an array
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry']
 
+// converting minutes to seconds
 foodApp.minutesToSeconds = (num) => {
   return num * 60;
 }
 
-
+// function to generate the homepage
 foodApp.generateHomePage = function() {
   let $homePage = $('<div>').attr('id','homePage');
   let $homePageForm = $('<form>');
               
 
-  //FOOD TYPE FIELDSET 
+  //FOOD TYPE FIELDSET
+  // creating the fieldset element 
   let $foodTypeFieldset = $('<fieldset>')
                           .attr('class','foodType');
 
+  // setting the parameters for the food choice
   let $foodTypeSelect =$('<select>')
                         .attr({
                           'name': 'foodType',
@@ -98,6 +103,7 @@ foodApp.homePageEvents = function (){
   });
 }
 
+// function got call API and get recipe information
 foodApp.getRecipe = function(foodType, maxTime) {
 	var getRecipe = $.ajax({
 		url: foodApp.baseUrl,
@@ -109,7 +115,7 @@ foodApp.getRecipe = function(foodType, maxTime) {
 			format: 'jsonp',
 			requirePictures: true,
 			q: foodType,
-      maxTotalTimeInSeconds: maxTime,
+     	 	maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
 		}
 	})
@@ -118,6 +124,7 @@ foodApp.getRecipe = function(foodType, maxTime) {
 	});
 }
 
+// shuffle the array of results we get so the first recipe retrieved isn't always the same
 foodApp.shuffle = function(data) {
 	var indexArray = [];
 	var shuffledRecipes = [];
@@ -200,7 +207,7 @@ foodApp.generateCard = function(data) {
   let $backButtonImg = $('<img>')
                       .attr({
                         'class': 'back-btn__arrow-img',
-                        'src': '../../../img/arrow.svg'
+                        'src': 'assets/arrow.svg'
                       });
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
@@ -242,6 +249,8 @@ foodApp.generateCard = function(data) {
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
   $card.append($backSection, $likeBtn, $foodTitle, $ingredientSection, $newRecipeBtn);
+  $('.container').append($card);
+
   return $card;
 }
 
@@ -249,8 +258,8 @@ foodApp.generateCard = function(data) {
  	console.log(data);
   console.log('isndie trimmer', data.substr(0, data.length-4));
   return data.substr(0, data.length-4);
-	// $(generateCard.smallImageUrls[0]).toString('=s90', '')
-	// console.log(generateCard.smallImageUrls[0])
+	$(generateCard.smallImageUrls[0]).toString('=s90', '')
+	console.log(generateCard.smallImageUrls[0])
 }
 foodApp.likeButton = function(text) {
   return `<a class='like-button'>
