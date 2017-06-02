@@ -1,27 +1,26 @@
 const foodApp = {}
 
 foodApp.userFoodType = "";
-foodApp.userTimeChoiceInSec = 0;
+
 foodApp.globalRequestCount = 0;
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry'];
 foodApp.likedRecipes = [];
-
+foodApp.timerValue = 0;
+foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
  // foodApp.generateCard();
   foodApp.generateHomePage();
-  foodApp.homePageEvents();
+
 }
 
-foodApp.minutesToSeconds = (num) => {
-  return num * 60;
-}
 foodApp.generateHomePage = function() {
 	// Reset globalRequestCount every single homePage is re-rendered;
 	this.globalRequestCount = 0;
-
+  // clearing previous timer value
+  this.timerValue = 0;
 	// Remove any previous content on the screen
 	$('.container').empty();
 
@@ -66,7 +65,7 @@ foodApp.generateHomePage = function() {
                     'id': 'handle'});
 
   $timeContainer.append($timePic, $timeHandle);
-  for (let i = 1; i <=4; i++) {
+/*  for (let i = 1; i <=4; i++) {
       let $timeOption = $('<input>')
                         .attr({
                           'type': 'radio',
@@ -75,7 +74,7 @@ foodApp.generateHomePage = function() {
                         });
       let $timeLabel =$(`<label>${i*15} Mins</label>`);
       $maxTimeFieldset.append($timeOption, $timeLabel);
-  }
+  }*/
   $maxTimeFieldset.append($timeContainer);
   // let $submitButton = $('<input type="submit" value="Submit" class="btn btn-2">');
 
@@ -86,9 +85,10 @@ foodApp.generateHomePage = function() {
 
 	// Populate container with homepage
   $('.container').append($homePage);
+  foodApp.homePageEvents();
 }
 
-foodApp.timerValue = 0;
+
 //ANIMATION FOR TIMER VALUE ON HOMEPAGE
 foodApp.timerEvents = function() {
   let rotate = 0;
@@ -102,23 +102,26 @@ foodApp.timerEvents = function() {
 // EVENTS ON HOMEPAGE EVENTS
 foodApp.homePageEvents = function (){
   foodApp.timerEvents();
+
   $('#submit').on('click', (e) => {
     // prevent defaulting from refresh
     e.preventDefault();
+
 		// Store the users food type choice, since its need for other parts of the code
 		// Same applies for the time choice as well
     this.userFoodType = $("#foodType").val(); // user food type choice
-    let maxTime = parseInt($("input[name=maxTime]:checked").val()); //int value of minutes
+    if (foodApp.timerValue === 0) {
+      this.timerValue = 4;
+    }
 
-    //convert maxTime into seconds for query search
-    this.userTimeChoiceInSec = this.minutesToSeconds(maxTime);
-    console.log(this.userFoodType, this.userTimeChoiceInSec);
+    this.userTimeChoiceInSeconds = this.timerValue * 15 * 60 ;
+    console.log(this.userFoodType, this.userTimeChoiceInSeconds);
 
 		// Remove home page and make room for overlay
 		$('.container').empty();
 		// Make request and populate container with overlay content
 
-    foodApp.getRecipe(this.userFoodType, this.userTimeChoiceInSec, this.globalRequestCount);
+    foodApp.getRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount);
   });
 }
 
@@ -237,7 +240,7 @@ foodApp.recipeCardPopulator = function(data) {
 			// When we make a new ajax request, we are returning no data
 			// As a result we will see a temporary error on our console regarding undefined data
 			// What is a safe way to fail?
-			foodApp.getRecipe(foodApp.userFoodType, foodApp.userTimeChoiceInSec, foodApp.globalRequestCount);
+			foodApp.getRecipe(foodApp.userFoodType, foodApp.userTimeChoiceInSeconds, foodApp.globalRequestCount);
 		}
 	}
 }
