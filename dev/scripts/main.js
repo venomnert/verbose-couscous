@@ -25,6 +25,10 @@ foodApp.generateHomePage = function() {
 	// Remove any previous content on the screen
 	$('.container').empty();
 
+  // Remove previous body style
+  $('body').removeAttr( 'style' );
+
+
   // Clear user's previous saved recipes
   foodApp.likedRecipes = [];
 
@@ -113,7 +117,23 @@ foodApp.homePageEvents = function (){
 		// Remove home page and make room for overlay
 		$('.container').empty();
 		// Make request and populate container with overlay content
+    let loadingGif = $('<img>')
+                      .attr({
+                        'class':'loading-gif',
+                        'src': '../../assets/loading_bk.gif'
+                      })
+                      .css({
+                        'position': 'relative',
+                        'top': '350px',
+                        'left': '45%'
+                      });
 
+    // linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),
+    $('body').css({
+      "background-image": 'url(../../assets/kitchen_background.jpg)',
+      "background-repeat": "no-repeat"
+    })
+    $('.container').append(loadingGif);
     foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
   });
 }
@@ -377,6 +397,9 @@ foodApp.newRecipeButton = function(text) {
 foodApp.generateGrid = function() {
   // Remove any previous generated content
   $('.container').empty();
+
+  // Remove previous body style
+  $('body').removeAttr( 'style' );
 
   if (foodApp.likedRecipes.length === 0) {
     let $emptyList = $('<h1>')
