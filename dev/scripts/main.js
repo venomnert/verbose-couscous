@@ -4,10 +4,12 @@ foodApp.userFoodType = "";
 
 foodApp.globalRequestCount = 0;
 foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
+foodApp.baseUrlTwo = "http://api.yummly.com/v1/api/recipe/"
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry'];
 foodApp.likedRecipes = [];
+foodApp.recipeId = [];
 foodApp.timerValue = 0;
 foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
@@ -81,7 +83,7 @@ foodApp.generateHomePage = function() {
 foodApp.timerEvents = function() {
   let rotate = 0;
   $("#handle").on('click', function (){
-    console.log('clicke');
+    console.log('click');
     rotate++;
     foodApp.timerValue = rotate % 4;
     $("#handle").css('transform', `rotate(${rotate * 90}deg)`);
@@ -109,12 +111,14 @@ foodApp.homePageEvents = function (){
 		$('.container').empty();
 		// Make request and populate container with overlay content
 
-    foodApp.getRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount);
+    foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount);
   });
 }
 
-foodApp.getRecipe = function(foodType, maxTime, startFrom) {
-	var getRecipe = $.ajax({
+
+// "Search Recipes" call from the Yummly API
+foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
+	var searchRecipe = $.ajax({
 		url: foodApp.baseUrl,
 		method: 'GET',
 		dataType: 'jsonp',
@@ -124,15 +128,34 @@ foodApp.getRecipe = function(foodType, maxTime, startFrom) {
 			format: 'jsonp',
 			requirePictures: true,
 			q: foodType,
-      maxTotalTimeInSeconds: maxTime,
+      		maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
 			start: startFrom,
+			// id: recipeId
 		}
 	})
-	.then(function (data){
+	.then(function (data, recipeId){
 		let shuffledRecipes = foodApp.shuffle(data);
 		foodApp.generateRecipeList(shuffledRecipes);
+		foodApp.getRecipe(recipeId);
 	});
+}
+
+// "Get Recipe" call from the Yummlyl API
+foodApp.getRecipe = function (recipeId) {
+	var getRecipe = $.ajax ({
+		url: foodApp.baseUrlTwo,
+		method: 'GET',
+		dataType: 'jsonP',
+		data: {
+			'_app_id': foodApp.id,
+			'_app_key': foodApp.key,
+			format: 'jsonp',
+		}
+	})
+	.then(function (recipeId){
+		console.log(data)
+	})
 }
 
 foodApp.shuffle = function(data) {
@@ -228,7 +251,7 @@ foodApp.recipeCardPopulator = function(data) {
 			// When we make a new ajax request, we are returning no data
 			// As a result we will see a temporary error on our console regarding undefined data
 			// What is a safe way to fail?
-			foodApp.getRecipe(foodApp.userFoodType, foodApp.userTimeChoiceInSeconds, foodApp.globalRequestCount);
+			foodApp.searchRecipe(foodApp.userFoodType, foodApp.userTimeChoiceInSeconds, foodApp.globalRequestCount);
 		}
 	}
 }
@@ -282,7 +305,7 @@ foodApp.generateCard = function(data) {
   let $ingredientList = $('<ul>')
                         .attr('class', 'ingredientList');
 
-  let $ingredientItem = $('<li>')
+  let $ingredientItem = $('<div>')
                         .attr('class', 'ingredientList__ingredientItem');
 		                    data.ingredients.forEach(function(data) {
                         	$ingredientItem.append('<li>' + data + '</li>')
@@ -386,6 +409,9 @@ foodApp.generateGridItem = function(recipeObj) {
 
 
   $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn);
+  $savedCardSml.on('click', function() {
+  	foodApp.getRecipe(recipeObj.id)
+  })
   return $savedCardSml;
 }
 
