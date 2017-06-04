@@ -1,0 +1,23 @@
+.grid {
+	background: $secondary-color;
+	height: 100vh;
+	padding: 50px 0;
+	.grid-item {
+		width: 30vw;
+		float: left;
+		height: 18vw;
+		margin: 0 1.65vw;
+	}
+	h3 {
+		color: white;
+		background-color: $primary-color;
+		width: 20%;
+		display: inline;
+	}
+	h4 {
+		color: $text-color;
+	}
+	p {
+		color: white;
+	}
+}
