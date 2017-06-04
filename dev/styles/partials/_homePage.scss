@@ -99,3 +99,21 @@
 	}
 }
 
+@media (max-width: 768px) {
+ 	
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  	#homePage fieldset h2 {
+  		font-size: 40px;
+  	}
+  	#homePage fieldset select {
+  		font-size: 30px;
+  	}
+  	.timeContainer {
+  		margin-bottom: 75px;
+  	}
+	
+  }
+
