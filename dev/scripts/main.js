@@ -9,7 +9,6 @@ foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry'];
 foodApp.likedRecipes = [];
-foodApp.recipeId = [];
 foodApp.timerValue = 0;
 foodApp.userTimeChoiceInSeconds = 0;
 foodApp.init = function () {
@@ -131,7 +130,6 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
       		maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
 			start: startFrom,
-			// id: recipeId
 		}
 	})
 	.then(function (data, recipeId){
@@ -144,7 +142,7 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
 // "Get Recipe" call from the Yummlyl API
 foodApp.getRecipe = function (recipeId) {
 	var getRecipe = $.ajax ({
-		url: foodApp.baseUrlTwo,
+		url: foodApp.baseUrlTwo.concat(recipeId),
 		method: 'GET',
 		dataType: 'jsonP',
 		data: {
@@ -153,8 +151,9 @@ foodApp.getRecipe = function (recipeId) {
 			format: 'jsonp',
 		}
 	})
-	.then(function (recipeId){
-		console.log(data)
+	.then(function (data){
+   		window.open(data.source.sourceRecipeUrl, '_blank');
+		console.log('recipe data', data)
 	})
 }
 
@@ -407,10 +406,17 @@ foodApp.generateGridItem = function(recipeObj) {
   let $linkBtn = $('<a>')
                   .attr('class', 'savedCardSml__linkBtn');
 
+  let $sourceUrl = $('<button>')
+  				  .attr('class', 'savedCardSml__sourceUrl')
+  				  .text('Find More')
 
-  $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn);
-  $savedCardSml.on('click', function() {
-  	foodApp.getRecipe(recipeObj.id)
+
+  $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn, $sourceUrl);
+  
+//
+  $sourceUrl.on('click', function(e) {
+  	e.preventDefault();
+  	foodApp.getRecipe(recipeObj.id);
   })
   return $savedCardSml;
 }
