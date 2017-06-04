@@ -7,7 +7,7 @@ foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
 foodApp.baseUrlTwo = "http://api.yummly.com/v1/api/recipe/"
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
-foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry'];
+foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry', 'taco', 'pizza', 'curry'];
 foodApp.likedRecipes = [];
 foodApp.recipeId = [];
 foodApp.timerValue = 0;
@@ -386,7 +386,7 @@ foodApp.generateGrid = function() {
   else {
     // Create a grid container and append it to the dom
     let $gridContainer = $('<div>')
-    .attr('class', 'grid');
+    .attr('class', 'grid clearfix');
     foodApp.likedRecipes.forEach((recipe) => {
       $gridContainer.append(foodApp.generateGridItem(recipe));
     });
@@ -395,25 +395,30 @@ foodApp.generateGrid = function() {
 }
 
 foodApp.generateGridItem = function(recipeObj) {
+  var fixedImage =  foodApp.imgSizeChange(recipeObj.smallImageUrls[0]);
   let $savedCardSml = $('<div>')
-  .attr('class', 'savedCardSml grid-item');
+                      .attr('class', 'savedCardSml grid-item')
+                      .css({'background': `linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)), url(${fixedImage}) center/cover`});
+
 
   let $name = $('<h3>')
   .attr('class','savedCardSml__name')
   .text(recipeObj.recipeName);
 
   let $authorsName = $('<h4>')
-  .attr('class','savedCardSml__author')
-  .text(recipeObj.sourceDisplayName);
+                    .attr('class','savedCardSml__author')
+                    .text(`from: ${recipeObj.sourceDisplayName}`);
   let $time = $('<p>')
-  .attr('class', 'savedCardSml__time')
-  .text(recipeObj.totalTimeInSeconds);
+              .attr('class', 'savedCardSml__time')
+              .text(`${recipeObj.totalTimeInSeconds/60} Minutes`);
 
   // Add stars based on the rating returned
   let $rating = $('<div>')
   .attr('class', 'savedCardSml__rating');
   for (let i = 0; i < recipeObj.rating; i++) {
-    $rating.append('<span>*</span>');
+    $rating.append('<i class="fa fa-star" aria-hidden="true"></i>');
   }
 
   let $linkBtn = $('<a>')
