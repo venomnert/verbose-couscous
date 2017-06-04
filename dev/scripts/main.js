@@ -255,7 +255,7 @@ foodApp.generateCard = function(data) {
                       .attr({
                         'class': 'back-btn__arrow-img'
                       })
-                      .append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
+                      .append('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
 
   $backButton.append($backButtonImg);
   $backButton.on('click', function() {
@@ -263,7 +263,7 @@ foodApp.generateCard = function(data) {
 		// foodApp.generateHomePage();
     foodApp.generateGrid();
   })
-  
+
   $backSection.append($backButton);
 
   let $likeBtn = $('<div>')

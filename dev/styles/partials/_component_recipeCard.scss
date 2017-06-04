@@ -11,8 +11,12 @@
   height: 50px;
 }
 .backSection__back-btn {
-  height: 27px;
-  width: 27px;
+  height: 40px;
+  width: 45px;
+  position: relative;
+  top: 40%;
+  left: 5%;
+  padding-bottom: 35px;
 }
 .back-btn__arrow-img {
   transform: rotate(180deg);
@@ -25,7 +29,7 @@
 }
 
 .recipeCard__food-title {
-    padding: 20px 20px;
+    padding: 10px 20px;
     margin: 125px 40px 0px 40px;
 }
 
