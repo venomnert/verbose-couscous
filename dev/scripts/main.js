@@ -24,6 +24,9 @@ foodApp.generateHomePage = function() {
 	// Remove any previous content on the screen
 	$('.container').empty();
 
+  // Clear user's previous saved recipes
+  foodApp.likedRecipes = [];
+
   let $homePage = $('<div>').attr('id','homePage');
   let $homePageForm = $('<form>');
 
@@ -94,7 +97,7 @@ foodApp.homePageEvents = function (){
 
   $('#submit').on('click', (e) => {
     // prevent defaulting from refresh
-    e.preventDefault()
+    e.preventDefault();
 
 		// Store the users food type choice, since its need for other parts of the code
 		// Same applies for the time choice as well
@@ -110,7 +113,7 @@ foodApp.homePageEvents = function (){
 		$('.container').empty();
 		// Make request and populate container with overlay content
 
-    foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount);
+    foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
   });
 }
 
@@ -127,15 +130,14 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
 			format: 'jsonp',
 			requirePictures: true,
 			q: foodType,
-      		maxTotalTimeInSeconds: maxTime,
+  			maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
-			start: startFrom,
+			start: startFrom
 		}
 	})
 	.then(function (data, recipeId){
 		let shuffledRecipes = foodApp.shuffle(data);
 		foodApp.generateRecipeList(shuffledRecipes);
-		foodApp.getRecipe(recipeId);
 	});
 }
 
@@ -270,23 +272,28 @@ foodApp.generateCard = function(data) {
               .css({'background': `url(${fixedImage})`, 'background-size': 'cover', 'background-position': 'center center'});
               console.log(data)
   let $backSection = $('<div>')
-                    .attr('class', 'backSection');
+                    .attr('class', 'backSection clearfix');
   let $backButton = $('<button>')
-                    .attr('class', 'backSection__back-btn like-button');
+                    .attr('class', 'backSection__back-btn like-button')
+                    .on('click', function() {
+                      // console.log('go back to home page');
+                  		foodApp.generateHomePage();
+                    });
   let $backButtonImg = $('<div>')
                       .attr({
                         'class': 'back-btn__arrow-img'
                       })
-                      .append('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
-
+                      .append('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: #ffffff"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>');
   $backButton.append($backButtonImg);
-  $backButton.on('click', function() {
-    // console.log('go back to home page');
-		// foodApp.generateHomePage();
-    foodApp.generateGrid();
-  })
-  
-  $backSection.append($backButton);
+
+  let $likeList = $('<button>')
+                  .attr('class', 'backSection__list_btn like-button')
+                  .text('See Your Likes')
+                  .on('click', function() {
+                    foodApp.generateGrid();
+                  });
+
+  $backSection.append($backButton, $likeList);
 
   let $likeBtn = $('<div>')
                 .attr('class', 'recipeCard__like-btn')
@@ -315,7 +322,6 @@ foodApp.generateCard = function(data) {
 	let $newRecipeBtn = $('<div>')
 											.attr('class', 'recipeCard__newRecipe-btn')
 											.append(foodApp.newRecipeButton('Not feeling it!'));
-											// .text('New Recipe');
 
   $ingredientSection.append($ingredientTitle, $ingredientList);
   $card.append($backSection, $foodTitle, $ingredientSection, $newRecipeBtn, $likeBtn);
@@ -332,6 +338,7 @@ foodApp.generateCard = function(data) {
 			$('.recipeCard__newRecipe-btn').trigger('click');
 		}, 200);
 	});
+  // Add swipe event listern to card using hammer.js
 	mc.on("panright", function(ev) {
 		// console.log('right swipe');
 		clearInterval(window.rightThrottle);
@@ -371,45 +378,50 @@ foodApp.generateGrid = function() {
   // Remove any previous generated content
   $('.container').empty();
 
-  // Create a grid container and append it to the dom
-  let $gridContainer = $('<div>')
-                    .attr('class', 'grid');
-
-  foodApp.likedRecipes.forEach((recipe) => {
-    $gridContainer.append(foodApp.generateGridItem(recipe));
-  });
-  $('.container').append($gridContainer);
+  if (foodApp.likedRecipes.length === 0) {
+    let $emptyList = $('<h1>')
+                  .text('No saved recipes');
+    $('.container').append($emptyList);
+  }
+  else {
+    // Create a grid container and append it to the dom
+    let $gridContainer = $('<div>')
+    .attr('class', 'grid');
+    foodApp.likedRecipes.forEach((recipe) => {
+      $gridContainer.append(foodApp.generateGridItem(recipe));
+    });
+    $('.container').append($gridContainer);
+  }
 }
 
 foodApp.generateGridItem = function(recipeObj) {
   let $savedCardSml = $('<div>')
-                      .attr('class', 'savedCardSml grid-item');
+  .attr('class', 'savedCardSml grid-item');
 
   let $name = $('<h3>')
-              .attr('class','savedCardSml__name')
-              .text(recipeObj.recipeName);
+  .attr('class','savedCardSml__name')
+  .text(recipeObj.recipeName);
 
   let $authorsName = $('<h4>')
-                    .attr('class','savedCardSml__author')
-                    .text(recipeObj.sourceDisplayName);
+  .attr('class','savedCardSml__author')
+  .text(recipeObj.sourceDisplayName);
   let $time = $('<p>')
-              .attr('class', 'savedCardSml__time')
-              .text(recipeObj.totalTimeInSeconds);
+  .attr('class', 'savedCardSml__time')
+  .text(recipeObj.totalTimeInSeconds);
 
   // Add stars based on the rating returned
   let $rating = $('<div>')
-                .attr('class', 'savedCardSml__rating');
+  .attr('class', 'savedCardSml__rating');
   for (let i = 0; i < recipeObj.rating; i++) {
     $rating.append('<span>*</span>');
   }
 
   let $linkBtn = $('<a>')
-                  .attr('class', 'savedCardSml__linkBtn');
+  .attr('class', 'savedCardSml__linkBtn');
 
   let $sourceUrl = $('<button>')
   				  .attr('class', 'savedCardSml__sourceUrl')
   				  .text('Find More')
-
 
   $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn, $sourceUrl);
   
