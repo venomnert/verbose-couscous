@@ -6,13 +6,15 @@
 
 @import "./vendor/scss/vendor_component_like-btn";
 
+// Container styling
+@import "./partials/component_container";
+
 // scss styling for home page
 @import "./partials/homePage";
 
 // scss styling for recipe card
 @import "./partials/component_recipeCard";
 @import "./partials/component_like-btn";
-@import "./partials/_component_newRecipe-btn";
 
 @import "./partials/component_tinder-swipe-animation";
 // @import "./partials/grid";
