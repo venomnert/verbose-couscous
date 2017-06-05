@@ -1,20 +1,21 @@
-@import "./partials/setup_colors";
-@import "./partials/setup_typography";
-@import "./partials/setup_normalize";
+@import "partials/setup_colors";
+@import "partials/setup_typography";
+@import "partials/setup_normalize";
 
-@import "./partials/element_img";
+@import "partials/element_img";
 
-@import "./vendor/scss/vendor_component_like-btn";
+@import "vendor/scss/vendor_component_like-btn";
 
 // Container styling
-@import "./partials/component_container";
+@import "partials/component_container";
 
 // scss styling for home page
-@import "./partials/homePage";
+@import "partials/homePage";
 
 // scss styling for recipe card
-@import "./partials/component_recipeCard";
-@import "./partials/component_like-btn";
+@import "partials/component_recipeCard";
+@import "partials/component_like-btn";
 
-@import "./partials/component_tinder-swipe-animation";
-// @import "./partials/grid";
+@import "partials/component_tinder-swipe-animation";
+@import "partials/grid";
+

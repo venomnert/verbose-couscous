@@ -129,7 +129,7 @@ foodApp.homePageEvents = function (){
 
     $('body').css({
       "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../../assets/kitchen_background.jpg) no-repeat'
-    })
+    });
     $('.container').append(loadingGif);
     foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
   });
@@ -393,12 +393,15 @@ foodApp.newRecipeButton = function(text) {
 }
 
 foodApp.generateGrid = function() {
+  
   // Remove any previous generated content
   $('.container').empty();
-
+  let $savedCollection = $('<h1>').text('Saved Collection');
   // Remove previous body style
   $('body').removeAttr( 'style' );
-
+  $('body').css({
+      "background": 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../../assets/gridBG.jpg) center/cover',
+      "height": "100vh"});
   if (foodApp.likedRecipes.length === 0) {
     let $emptyList = $('<h1>')
                   .text('No saved recipes');
@@ -411,7 +414,7 @@ foodApp.generateGrid = function() {
     foodApp.likedRecipes.forEach((recipe) => {
       $gridContainer.append(foodApp.generateGridItem(recipe));
     });
-    $('.container').append($gridContainer);
+    $('.container').append($savedCollection, $gridContainer);
   }
 }
 
@@ -420,10 +423,10 @@ foodApp.generateGridItem = function(recipeObj) {
   let $savedCardSml = $('<div>')
                       .attr('class', 'savedCardSml grid-item')
                       .css({'background': `linear-gradient(
-      rgba(0, 0, 0, 0.45),
-      rgba(0, 0, 0, 0.45)), url(${fixedImage}) center/cover`});
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)), url(${fixedImage}) center/cover`});
 
-
+  
   let $name = $('<h3>')
   .attr('class','savedCardSml__name')
   .text(recipeObj.recipeName);
@@ -434,7 +437,7 @@ foodApp.generateGridItem = function(recipeObj) {
   let $time = $('<p>')
               .attr('class', 'savedCardSml__time')
               .text(`${recipeObj.totalTimeInSeconds/60} Minutes`);
-
+  $time.prepend('<i class="fa fa-clock-o" aria-hidden="true"></i>');
   // Add stars based on the rating returned
   let $rating = $('<div>')
   .attr('class', 'savedCardSml__rating');
