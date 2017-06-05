@@ -3,8 +3,8 @@ const foodApp = {}
 foodApp.userFoodType = "";
 
 foodApp.globalRequestCount = 0;
-foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
-foodApp.baseUrlTwo = "http://api.yummly.com/v1/api/recipe/"
+foodApp.baseUrl = "https://api.yummly.com/v1/api/recipes";
+foodApp.baseUrlTwo = "https://api.yummly.com/v1/api/recipe/"
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry', 'taco', 'pizza', 'curry'];
