@@ -119,7 +119,7 @@ foodApp.homePageEvents = function (){
     let loadingGif = $('<img>')
                       .attr({
                         'class':'loading-gif',
-                        'src': '../../assets/loading_bk.gif'
+                        'src': 'assets/loading_bk.gif'
                       })
                       .css({
                         'position': 'relative',
@@ -128,7 +128,7 @@ foodApp.homePageEvents = function (){
                       });
 
     $('body').css({
-      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../../assets/kitchen_background.jpg) no-repeat'
+      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(assets/kitchen_background.jpg) no-repeat'
     });
     $('.container').append(loadingGif);
     foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
