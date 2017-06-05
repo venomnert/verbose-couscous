@@ -398,17 +398,17 @@ foodApp.generateGrid = function() {
   $('.container').empty();
   let $backHomeBtn = $('<button>')
                       .attr('class', 'backHome-btn')
-                      .text('Back Home')
+                      .text('Home')
                       .on('click', function() {
                           foodApp.generateHomePage();
                       });
+  let $btnDiv = $('<div class="button">').append($backHomeBtn);
 
-  let $savedCollection = $('<h1>').text('Saved Collection');
+  let $savedCollection = $('<h1 class="savedCollection">').text('Saved Collection');
   // Remove previous body style
   $('body').removeAttr( 'style' );
   $('body').css({
-      "background": 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../../assets/gridBG.jpg) center/cover',
-      "height": "100vh"});
+      "background": 'linear-gradient(#607D8B, rgba(0, 0, 0, 0.63)), url(../../assets/clearBG.jpg) center center / cover'});
   if (foodApp.likedRecipes.length === 0) {
     let $emptyList = $('<h1>')
                   .text('No saved recipes');
@@ -421,7 +421,7 @@ foodApp.generateGrid = function() {
     foodApp.likedRecipes.forEach((recipe) => {
       $gridContainer.append(foodApp.generateGridItem(recipe));
     });
-    $('.container').append($savedCollection, $backHomeBtn, $gridContainer);
+    $('.container').append($savedCollection, $gridContainer, $btnDiv);
   }
 }
 
@@ -457,8 +457,7 @@ foodApp.generateGridItem = function(recipeObj) {
 
   let $sourceUrl = $('<button>')
   				  .attr('class', 'savedCardSml__sourceUrl')
-  				  .text('Find More')
-
+  				  .text('See More')
   $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn, $sourceUrl);
 
 //
