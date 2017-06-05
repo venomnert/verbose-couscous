@@ -4,3 +4,15 @@
   right: -70%;
   width: 100px;
 }
+
+@media (max-width: 480px) {
+  .recipeCard {
+    width: 300px;
+  }
+  .recipeCard__newRecipe-btn {
+      right: -5px; 
+  }
+  .recipeCard__like-btn {
+      right: -60%;
+  }
+}
