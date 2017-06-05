@@ -3,8 +3,8 @@ const foodApp = {}
 foodApp.userFoodType = "";
 
 foodApp.globalRequestCount = 0;
-foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
-foodApp.baseUrlTwo = "http://api.yummly.com/v1/api/recipe/"
+foodApp.baseUrl = "https://api.yummly.com/v1/api/recipes";
+foodApp.baseUrlTwo = "https://api.yummly.com/v1/api/recipe/"
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry', 'taco', 'pizza', 'curry'];
@@ -119,7 +119,7 @@ foodApp.homePageEvents = function (){
     let loadingGif = $('<img>')
                       .attr({
                         'class':'loading-gif',
-                        'src': '../../assets/loading_bk.gif'
+                        'src': '../assets/loading_bk.gif'
                       })
                       .css({
                         'position': 'relative',
@@ -128,7 +128,7 @@ foodApp.homePageEvents = function (){
                       });
 
     $('body').css({
-      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../../assets/kitchen_background.jpg) no-repeat'
+      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../assets/kitchen_background.jpg) no-repeat'
     });
     $('.container').append(loadingGif);
     foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
@@ -150,7 +150,7 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
 			q: foodType,
   			maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
-			start: startFrom
+			start: startFrom+'/'
 		}
 	})
 	.then(function (data, recipeId){
@@ -346,7 +346,7 @@ foodApp.generateCard = function(data) {
 
 	// This section is for dealing with swipe event
 	var mc = new Hammer($card[0]);
-	mc.on("panleft", function(ev) {
+	mc.on("swipeleft", function(ev) {
 		// console.log('left swipe');
 
 		// The code below debounces the swipe event.
@@ -357,7 +357,7 @@ foodApp.generateCard = function(data) {
 		}, 200);
 	});
   // Add swipe event listern to card using hammer.js
-	mc.on("panright", function(ev) {
+	mc.on("swiperight", function(ev) {
 		// console.log('right swipe');
 		clearInterval(window.rightThrottle);
 		window.rightThrottle = setTimeout(function() {
@@ -393,9 +393,16 @@ foodApp.newRecipeButton = function(text) {
 }
 
 foodApp.generateGrid = function() {
-  
+
   // Remove any previous generated content
   $('.container').empty();
+  let $backHomeBtn = $('<button>')
+                      .attr('class', 'backHome-btn')
+                      .text('Back Home')
+                      .on('click', function() {
+                          foodApp.generateHomePage();
+                      });
+
   let $savedCollection = $('<h1>').text('Saved Collection');
   // Remove previous body style
   $('body').removeAttr( 'style' );
@@ -414,7 +421,7 @@ foodApp.generateGrid = function() {
     foodApp.likedRecipes.forEach((recipe) => {
       $gridContainer.append(foodApp.generateGridItem(recipe));
     });
-    $('.container').append($savedCollection, $gridContainer);
+    $('.container').append($savedCollection, $backHomeBtn, $gridContainer);
   }
 }
 
@@ -426,7 +433,7 @@ foodApp.generateGridItem = function(recipeObj) {
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2)), url(${fixedImage}) center/cover`});
 
-  
+
   let $name = $('<h3>')
   .attr('class','savedCardSml__name')
   .text(recipeObj.recipeName);
@@ -453,7 +460,7 @@ foodApp.generateGridItem = function(recipeObj) {
   				  .text('Find More')
 
   $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn, $sourceUrl);
-  
+
 //
   $sourceUrl.on('click', function(e) {
   	e.preventDefault();
