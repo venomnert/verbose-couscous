@@ -457,16 +457,17 @@ a {
       font-size: 60px;
       font-family: "Old Standard TT", serif; }
   #homePage img {
-    width: 50%; }
+    width: 25%; }
   #homePage .timeContainer {
-    position: relative; }
+    position: relative;
+    margin-bottom: 75px; }
     #homePage .timeContainer #handle {
       position: absolute;
-      left: 24%;
+      left: 37.5%;
       top: -2%;
       -webkit-transition: all 0.8s;
       transition: all 0.8s;
-      width: 52%;
+      width: 25%;
       height: 103%; }
   #homePage button {
     outline: none;
@@ -492,6 +493,20 @@ a {
     #homePage button:after {
       content: "SUBMIT"; }
 
+@media (max-width: 940px) {
+  #homePage .timeContainer #handle {
+    position: absolute;
+    left: 30%;
+    top: -2%;
+    -webkit-transition: all 0.8s;
+    transition: all 0.8s;
+    width: 40%;
+    height: 103%; }
+  #homePage img {
+    width: 40%; }
+  .timeContainer {
+    margin-bottom: 40px; } }
+
 /* Landscape phones and down */
 @media (max-width: 480px) {
   #homePage fieldset h2 {
@@ -502,13 +517,13 @@ a {
     font-size: 25px;
     margin: 0 auto;
     margin-bottom: 40px; }
-  .timeContainer {
-    margin-bottom: 75px; }
   #homePage img {
     width: 100%; }
   #homePage .timeContainer #handle {
     left: 0;
-    width: 100%; } }
+    width: 100%; }
+  #homePage .timeContainer {
+    margin-bottom: 40px; } }
 
 .recipeCard {
   width: 500px;
@@ -558,11 +573,12 @@ a {
   margin: 125px 40px 0px 40px; }
 
 .ingredientSection__ingredientTitle {
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  letter-spacing: 1px; }
 
 .recipeCard__food-title {
-  background-color: #A7DBD8;
-  opacity: 0.85; }
+  background: rgba(167, 219, 216, 0.8);
+  letter-spacing: 1px; }
 
 .ingredientList__ingredientItem {
   font-family: 'Old Standard TT', serif;
@@ -580,10 +596,13 @@ a {
 .ingredientList li {
   margin-bottom: 10px; }
 
-@media (max-width: 575px) {
+#scrollarea-content {
+  min-height: 101%; }
+
+@media (max-width: 768px) {
   .recipeCard {
+    width: 400px;
     margin-top: 50px;
-    width: 275px;
     padding: 2em 0; }
   .recipeCard__food-title {
     padding: 10px 20px;
@@ -605,11 +624,28 @@ a {
   .recipeCard__food-title {
     font-size: 21px; } }
 
+@media (max-width: 480px) {
+  .recipeCard {
+    width: 300px;
+    overflow-y: scroll; }
+  .recipeCard__newRecipe-btn {
+    right: -5px; }
+  .backSection__list_btn {
+    right: 5%; } }
+
 .recipeCard__like-btn {
   position: relative;
   bottom: 10px;
   right: -59%;
   width: 35%; }
+
+@media (max-width: 480px) {
+  .recipeCard {
+    width: 300px; }
+  .recipeCard__newRecipe-btn {
+    right: -5px; }
+  .recipeCard__like-btn {
+    right: -60%; } }
 
 .swipe-left {
   -webkit-animation: swipe-left 0.5s forwards;
@@ -650,16 +686,20 @@ a {
   .grid .grid-item {
     width: 30%;
     float: left;
-    height: 18vw;
+    height: 300px;
     margin: 1.5%;
     padding: 0.5% 1% 3%; }
+  .grid h1 {
+    text-align: center;
+    display: inline; }
   .grid h3 {
     color: white;
     background-color: #69D2E7;
     width: 54%;
     min-width: 200px;
     margin-bottom: 0;
-    padding: 2%; }
+    padding: 2%;
+    letter-spacing: 1px; }
   .grid h4 {
     color: #AAA5A1;
     margin: 0;
@@ -673,13 +713,14 @@ a {
     width: 40%;
     min-width: 150px;
     background: rgba(0, 0, 0, 0.8);
-    margin-bottom: 2%; }
+    margin-bottom: 15px; }
   .grid i {
     padding: 0 2%; }
   .grid .savedCardSml__time {
     font-size: 18px;
     border-radius: 20px;
-    border: 1px solid white; }
+    border: 1px solid white;
+    letter-spacing: 1px; }
     .grid .savedCardSml__time i {
       padding: 0 5%;
       font-size: 22px; }
@@ -688,4 +729,55 @@ a {
     color: #69D2E7;
     background: rgba(0, 0, 0, 0.8);
     display: inline;
-    border-radius: 20px; }
+    border-radius: 20px;
+    padding: 1.5% 0; }
+  .grid button {
+    border: 1px solid #AAA5A1;
+    -webkit-box-shadow: 3px 3px 3px black;
+            box-shadow: 3px 3px 3px black;
+    display: block;
+    margin-top: 20px;
+    padding: 2%;
+    background: white;
+    letter-spacing: 0.5px;
+    color: #AAA5A1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+    .grid button:hover {
+      color: black;
+      -webkit-box-shadow: 3px 3px 3px black;
+              box-shadow: 3px 3px 3px black;
+      text-decoration: underline; }
+
+.savedCollection {
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  border-bottom: 5px solid #69D2E7;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: 1px;
+  color: black;
+  display: inline-block;
+  width: 450px;
+  padding-bottom: 10px; }
+
+.button button {
+  width: 150px;
+  margin: 10px auto;
+  border: 3px solid black;
+  -webkit-box-shadow: 3px 3px 3px black;
+          box-shadow: 3px 3px 3px black;
+  display: block;
+  padding: 0.8%;
+  background: white;
+  letter-spacing: 0.5px;
+  color: #69D2E7;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  font-family: "Old Standard TT", serif;
+  font-size: 20px;
+  letter-spacing: 1px; }
+  .button button:hover {
+    color: black;
+    -webkit-box-shadow: 3px 3px 3px black;
+            box-shadow: 3px 3px 3px black; }

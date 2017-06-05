@@ -150,7 +150,7 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
 			q: foodType,
   			maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
-			start: startFrom+'/'
+			start: startFrom,
 		}
 	})
 	.then(function (data, recipeId){
