@@ -120,11 +120,6 @@ foodApp.homePageEvents = function (){
                       .attr({
                         'class':'loading-gif',
                         'src': '../assets/loading_bk.gif'
-                      })
-                      .css({
-                        'position': 'relative',
-                        'top': '350px',
-                        'left': '45%'
                       });
 
     $('body').css({
@@ -407,8 +402,10 @@ foodApp.generateGrid = function() {
   let $savedCollection = $('<h1 class="savedCollection">').text('Saved Collection');
   // Remove previous body style
   $('body').removeAttr( 'style' );
+
+  // #607D8B, rgba(0, 0, 0, 0.63) 
   $('body').css({
-      "background": 'linear-gradient(#607D8B, rgba(0, 0, 0, 0.63)), url(../../assets/clearBG.jpg) center center / cover'});
+      "background": 'linear-gradient(rgba(105, 210, 231, 0.3), rgba(105, 210, 231, 0.3)) center center / cover'});
   if (foodApp.likedRecipes.length === 0) {
     let $emptyList = $('<h1>')
                   .text('No saved recipes');

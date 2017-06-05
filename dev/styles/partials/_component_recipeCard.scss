@@ -84,7 +84,7 @@
 @media (max-width: 768px) {
   .recipeCard {
     width: 400px;
-    margin-top: 50px;
+    margin-top: 200px;
     padding: 2em 0;
 
   }
@@ -117,11 +117,11 @@
 
 @media (max-width: 480px) {
   .recipeCard {
-    width: 300px;
-    overflow-y: scroll;
+    width: 275px;
+    margin-top: 150px;
   }
   .recipeCard__newRecipe-btn {
-    right: -5px; 
+    right: -5px;
   }
   .backSection__list_btn {
     right: 5%;

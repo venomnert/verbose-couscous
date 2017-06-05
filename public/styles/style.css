@@ -602,7 +602,7 @@ a {
 @media (max-width: 768px) {
   .recipeCard {
     width: 400px;
-    margin-top: 50px;
+    margin-top: 200px;
     padding: 2em 0; }
   .recipeCard__food-title {
     padding: 10px 20px;
@@ -626,8 +626,8 @@ a {
 
 @media (max-width: 480px) {
   .recipeCard {
-    width: 300px;
-    overflow-y: scroll; }
+    width: 275px;
+    margin-top: 150px; }
   .recipeCard__newRecipe-btn {
     right: -5px; }
   .backSection__list_btn {
@@ -680,7 +680,7 @@ a {
     opacity: 0; } }
 
 .grid {
-  width: 95%;
+  width: 80%;
   margin: 0 auto;
   position: relative; }
   .grid .grid-item {
@@ -761,6 +761,9 @@ a {
   width: 450px;
   padding-bottom: 10px; }
 
+.backHome-btn {
+  padding-bottom: 500px; }
+
 .button button {
   width: 150px;
   margin: 10px auto;
@@ -781,3 +784,43 @@ a {
     color: black;
     -webkit-box-shadow: 3px 3px 3px black;
             box-shadow: 3px 3px 3px black; }
+
+@media (max-width: 975px) {
+  .grid .grid-item {
+    width: 45%; } }
+
+@media (max-width: 675px) {
+  .grid .grid-item {
+    width: 70%;
+    margin-left: 10%; } }
+
+@media (max-width: 450px) {
+  .grid .grid-item {
+    width: 90%;
+    margin: 0 0 8% 0; } }
+
+@media (max-width: 400px) {
+  .grid .grid-item {
+    width: 95%;
+    margin-left: 3%;
+    padding: 0.75em; } }
+
+.loading-gif {
+  position: relative;
+  top: 350px;
+  left: 45%; }
+
+@media (max-width: 768px) {
+  .loading-gif {
+    top: 350px;
+    left: 35%; } }
+
+@media (max-width: 450px) {
+  .loading-gif {
+    top: 300px;
+    left: 30%; } }
+
+@media (max-width: 380px) {
+  .loading-gif {
+    top: 300px;
+    left: 25%; } }
