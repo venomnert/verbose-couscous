@@ -686,16 +686,20 @@ a {
   .grid .grid-item {
     width: 30%;
     float: left;
-    height: 18vw;
+    height: 300px;
     margin: 1.5%;
     padding: 0.5% 1% 3%; }
+  .grid h1 {
+    text-align: center;
+    display: inline; }
   .grid h3 {
     color: white;
     background-color: #69D2E7;
     width: 54%;
     min-width: 200px;
     margin-bottom: 0;
-    padding: 2%; }
+    padding: 2%;
+    letter-spacing: 1px; }
   .grid h4 {
     color: #AAA5A1;
     margin: 0;
@@ -709,13 +713,14 @@ a {
     width: 40%;
     min-width: 150px;
     background: rgba(0, 0, 0, 0.8);
-    margin-bottom: 2%; }
+    margin-bottom: 15px; }
   .grid i {
     padding: 0 2%; }
   .grid .savedCardSml__time {
     font-size: 18px;
     border-radius: 20px;
-    border: 1px solid white; }
+    border: 1px solid white;
+    letter-spacing: 1px; }
     .grid .savedCardSml__time i {
       padding: 0 5%;
       font-size: 22px; }
@@ -724,4 +729,55 @@ a {
     color: #69D2E7;
     background: rgba(0, 0, 0, 0.8);
     display: inline;
-    border-radius: 20px; }
+    border-radius: 20px;
+    padding: 1.5% 0; }
+  .grid button {
+    border: 1px solid #AAA5A1;
+    -webkit-box-shadow: 3px 3px 3px black;
+            box-shadow: 3px 3px 3px black;
+    display: block;
+    margin-top: 20px;
+    padding: 2%;
+    background: white;
+    letter-spacing: 0.5px;
+    color: #AAA5A1;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s; }
+    .grid button:hover {
+      color: black;
+      -webkit-box-shadow: 3px 3px 3px black;
+              box-shadow: 3px 3px 3px black;
+      text-decoration: underline; }
+
+.savedCollection {
+  text-align: center;
+  text-transform: uppercase;
+  display: inline-block;
+  border-bottom: 5px solid #69D2E7;
+  font-family: "Old Standard TT", serif;
+  letter-spacing: 1px;
+  color: black;
+  display: inline-block;
+  width: 450px;
+  padding-bottom: 10px; }
+
+.button button {
+  width: 150px;
+  margin: 10px auto;
+  border: 3px solid black;
+  -webkit-box-shadow: 3px 3px 3px black;
+          box-shadow: 3px 3px 3px black;
+  display: block;
+  padding: 0.8%;
+  background: white;
+  letter-spacing: 0.5px;
+  color: #69D2E7;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  font-family: "Old Standard TT", serif;
+  font-size: 20px;
+  letter-spacing: 1px; }
+  .button button:hover {
+    color: black;
+    -webkit-box-shadow: 3px 3px 3px black;
+            box-shadow: 3px 3px 3px black; }
