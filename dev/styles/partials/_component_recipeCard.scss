@@ -49,11 +49,12 @@
 
 .ingredientSection__ingredientTitle {
   padding: 10px 20px;
+  letter-spacing: 1px;
 }
 
 .recipeCard__food-title {
-  background-color: $secondary-color;
-  opacity: 0.85;
+  background: rgba(167, 219, 216, 0.8);
+  letter-spacing: 1px;
 }
 
 .ingredientList__ingredientItem {
@@ -75,11 +76,17 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 575px) {
+
+#scrollarea-content{
+    min-height:101%;
+}
+
+@media (max-width: 768px) {
   .recipeCard {
-    margin-top: 50px;
-    width: 275px;
+    width: 400px;
+    margin-top: 50px
     padding: 2em 0;
+
   }
   .recipeCard__food-title {
     padding: 10px 20px;
@@ -105,5 +112,18 @@
   }
   .recipeCard__food-title {
     font-size: 21px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipeCard {
+    width: 300px;
+    overflow-y: scroll;
+  }
+  .recipeCard__newRecipe-btn {
+    right: -5px; 
+  }
+  .backSection__list_btn {
+    right: 5%;
   }
 }
