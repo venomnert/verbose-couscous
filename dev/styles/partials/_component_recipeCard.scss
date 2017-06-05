@@ -28,9 +28,9 @@
 }
 .recipeCard__newRecipe-btn {
   position: relative;
-  bottom: -30px;
-  right: -20px;
-  width: 150px;
+  top: 26px;
+  right: -5%;
+  width: 35%;
 }
 .back-btn__arrow-img {
   transform: rotate(180deg);
@@ -69,14 +69,41 @@
 
 .ingredientList {
   margin-top: 0;
+  padding: 0 0 0 15px;
+}
+.ingredientList li {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 575px) {
   .recipeCard {
-    width: 250px;
+    margin-top: 50px;
+    width: 275px;
+    padding: 2em 0;
   }
   .recipeCard__food-title {
     padding: 10px 20px;
     margin: 60px 40px 0px 40px;
+  }
+  .ingredientSection {
+    height: 200px;
+    overflow-y: scroll;
+  }
+  .recipeCard__newRecipe-btn, .recipeCard__like-btn {
+    display: none;
+  }
+  .backSection__back-btn {
+    height: 38px;
+    width: 40px;
+    top: 51%;
+    left: 9%;
+    padding: 0;
+  }
+  .back-btn__arrow-img svg {
+    height: 13px;
+    width: 15px;
+  }
+  .recipeCard__food-title {
+    font-size: 21px;
   }
 }
