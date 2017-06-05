@@ -407,7 +407,7 @@ foodApp.generateGrid = function() {
   // Remove previous body style
   $('body').removeAttr( 'style' );
   $('body').css({
-      "background": 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../../assets/gridBG.jpg) center/cover',
+      "background": 'linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(assets/gridBG.jpg) center/cover',
       "height": "100vh"});
   if (foodApp.likedRecipes.length === 0) {
     let $emptyList = $('<h1>')
