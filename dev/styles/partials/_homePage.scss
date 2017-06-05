@@ -49,16 +49,17 @@
 		}
 	}
 	img {
-		width: 50%;
+		width: 25%;
 	}
 	.timeContainer {
 		position: relative;
+		margin-bottom: 75px;
 		#handle{
 			position: absolute;
-			left: 24%;
+			left: 37.5%;
 			top: -2%;
 			transition: all 0.8s;
-			width: 52%;
+			width: 25%;
 			height: 103%;
 			
 		}
@@ -99,6 +100,24 @@
 	}
 }
 
+@media (max-width: 940px) {
+	#homePage .timeContainer #handle {
+	    position: absolute;
+	    left: 30%;
+	    top: -2%;
+	    -webkit-transition: all 0.8s;
+	    transition: all 0.8s;
+	    width: 40%;
+	    height: 103%;
+	}
+	#homePage img {
+	    width: 40%;
+	}
+	.timeContainer {
+		margin-bottom: 40px;
+	}
+}
+
 @media (max-width: 768px) {
  	
 }
@@ -115,15 +134,15 @@
   		margin: 0 auto;
     	margin-bottom: 40px;
   	}
-  	.timeContainer {
-  		margin-bottom: 75px;
-  	}
   	#homePage img {
     	width: 100%;
 	}
 	#homePage .timeContainer #handle {
 	    left: 0;
 	    width: 100%;
+	}
+	#homePage .timeContainer {
+		margin-bottom: 40px;
 	}
  }
 

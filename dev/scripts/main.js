@@ -3,8 +3,8 @@ const foodApp = {}
 foodApp.userFoodType = "";
 
 foodApp.globalRequestCount = 0;
-foodApp.baseUrl = "http://api.yummly.com/v1/api/recipes";
-foodApp.baseUrlTwo = "http://api.yummly.com/v1/api/recipe/"
+foodApp.baseUrl = "https://api.yummly.com/v1/api/recipes";
+foodApp.baseUrlTwo = "https://api.yummly.com/v1/api/recipe/"
 foodApp.id = '34cb1a7b';
 foodApp.key = 'c6a456b06c87490207e4863b23095a4a';
 foodApp.foodTypes = ['pasta', 'sushi', 'stir-fry', 'taco', 'pizza', 'curry'];
@@ -119,7 +119,7 @@ foodApp.homePageEvents = function (){
     let loadingGif = $('<img>')
                       .attr({
                         'class':'loading-gif',
-                        'src': '../../assets/loading_bk.gif'
+                        'src': '../assets/loading_bk.gif'
                       })
                       .css({
                         'position': 'relative',
@@ -128,7 +128,7 @@ foodApp.homePageEvents = function (){
                       });
 
     $('body').css({
-      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../../assets/kitchen_background.jpg) no-repeat'
+      "background": 'linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(../assets/kitchen_background.jpg) no-repeat'
     });
     $('.container').append(loadingGif);
     foodApp.searchRecipe(this.userFoodType, this.userTimeChoiceInSeconds,this.globalRequestCount, 0);
@@ -150,7 +150,7 @@ foodApp.searchRecipe = function(foodType, maxTime, startFrom) {
 			q: foodType,
   			maxTotalTimeInSeconds: maxTime,
 			maxResult: 100,
-			start: startFrom
+			start: startFrom+'/'
 		}
 	})
 	.then(function (data, recipeId){
