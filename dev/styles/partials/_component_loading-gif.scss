@@ -1,0 +1,23 @@
+.loading-gif {
+  position: relative;
+  top: 350px;
+  left: 45%;
+}
+@media (max-width: 768px) {
+  .loading-gif {
+    top: 350px ;
+    left: 35%;
+  }
+}
+@media (max-width: 450px) {
+  .loading-gif {
+    top: 300px ;
+    left: 30%;
+  }
+}
+@media (max-width: 380px) {
+  .loading-gif {
+    top: 300px ;
+    left: 25%;
+  }
+}
