@@ -346,7 +346,7 @@ foodApp.generateCard = function(data) {
 
 	// This section is for dealing with swipe event
 	var mc = new Hammer($card[0]);
-	mc.on("panleft", function(ev) {
+	mc.on("swipeleft", function(ev) {
 		// console.log('left swipe');
 
 		// The code below debounces the swipe event.
@@ -357,7 +357,7 @@ foodApp.generateCard = function(data) {
 		}, 200);
 	});
   // Add swipe event listern to card using hammer.js
-	mc.on("panright", function(ev) {
+	mc.on("swiperight", function(ev) {
 		// console.log('right swipe');
 		clearInterval(window.rightThrottle);
 		window.rightThrottle = setTimeout(function() {
