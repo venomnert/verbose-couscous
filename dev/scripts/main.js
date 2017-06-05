@@ -393,9 +393,16 @@ foodApp.newRecipeButton = function(text) {
 }
 
 foodApp.generateGrid = function() {
-  
+
   // Remove any previous generated content
   $('.container').empty();
+  let $backHomeBtn = $('<button>')
+                      .attr('class', 'backHome-btn')
+                      .text('Back Home')
+                      .on('click', function() {
+                          foodApp.generateHomePage();
+                      });
+
   let $savedCollection = $('<h1>').text('Saved Collection');
   // Remove previous body style
   $('body').removeAttr( 'style' );
@@ -414,7 +421,7 @@ foodApp.generateGrid = function() {
     foodApp.likedRecipes.forEach((recipe) => {
       $gridContainer.append(foodApp.generateGridItem(recipe));
     });
-    $('.container').append($savedCollection, $gridContainer);
+    $('.container').append($savedCollection, $backHomeBtn, $gridContainer);
   }
 }
 
@@ -426,7 +433,7 @@ foodApp.generateGridItem = function(recipeObj) {
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0.2)), url(${fixedImage}) center/cover`});
 
-  
+
   let $name = $('<h3>')
   .attr('class','savedCardSml__name')
   .text(recipeObj.recipeName);
@@ -453,7 +460,7 @@ foodApp.generateGridItem = function(recipeObj) {
   				  .text('Find More')
 
   $savedCardSml.append($name,$authorsName, $time, $rating, $linkBtn, $sourceUrl);
-  
+
 //
   $sourceUrl.on('click', function(e) {
   	e.preventDefault();
